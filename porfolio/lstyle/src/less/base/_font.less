@@ -1,0 +1,47 @@
+@import "./font/_font_charlotte.less";
+@import "./font/_font_nobel.less";
+
+@font-family-mobile           : 'Apple SD Gothic Neo', Sans-Serif, 'Nanum Barun Gothic', 'Nanum Barun Gothic', 'Nanum Gothic', 'nanumgothic', NG,'나눔고딕', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움';
+@font-family-noto             : 'Noto Sans KR', sans-serif;
+@font-family-malgun           : 'Malgun Gothic', '맑은 고딕', '맑은고딕', 'Apple SD Gothic Neo', Sans-Serif, 'Dotum', '돋움', 'Gulim', '굴림', '굴림체';
+@font-family-dotum            : 'Dotum', '돋움', 'Gulim', '굴림', '굴림체';
+@font-family-tahoma           : 'Tahoma', Tahoma, 'Verdana', Verdana, Arial, sans-serif;
+@font-family-serif            : Georgia, 'Times New Roman', Times, serif;
+@font-family-sans-serif       : 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-family-num              : 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-family-montserrat       : 'montserrat', 'Noto Sans KR', sans-serif, 'Nanum Barun Gothic', 'NanumBarunGothic', '나눔바른고딕', 'Nanum Gothic', 'nanumgothic';
+@font-family-montserrat-light : 'montserrat', 'Noto Sans KR', sans-serif, 'Nanum Barun Gothic', 'NanumBarunGothic', '나눔바른고딕', 'Nanum Gothic', 'nanumgothic';
+@font-family-monospace        : Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-nanum            : 'Nanum Gothic', 'nanumgothic', NG,'나눔고딕', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', Sans-Serif, 'Dotum', '돋움', 'Gulim', '굴림', '굴림체';
+@font-family-nanum-barun      : 'Nanum Barun Gothic', 'Nanum Gothic', 'nanumgothic', NG,'나눔고딕', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', Sans-Serif, 'Dotum', '돋움', 'Gulim', '굴림', '굴림체';
+@font-family-roman            : Georgia, Monaco;
+@font-family-nanum-barun      : 'Nanum Barun Gothic', 'NanumBarunGothic', '나눔바른고딕', 'Nanum Gothic', 'nanumgothic', 'Apple SD Gothic Neo', '돋움', 'dotum', 'Dotum', 'Helvetica', 'sans-serif';
+
+@font-family-charlotte        : 'Charlotte Text', 'Nanum Gothic', 'nanumgothic', NG,'나눔고딕', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', Sans-Serif, 'Dotum', '돋움', 'Gulim', '굴림', '굴림체';
+@font-family-Nobel			  : 'Nobel', 'Charlotte Text', 'Nanum Barun Gothic', 'NanumBarunGothic', '나눔바른고딕', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-family-Nobel-light	  : 'Nobel Light', 'Nanum Barun Gothic', 'NanumBarunGothic', '나눔바른고딕', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+@font-mobile                  : @font-family-mobile; // 모바일
+@font-kor                     : @font-family-charlotte; // 한글
+@font-eng                     : @font-family-Nobel; // 영문
+
+@before-font-family           : @font-kor; // 기본폰트
+@before-heading-font-family   : @font-kor; // 헤딩폰트
+
+.font-kor, .kor {
+    font-family:  @font-kor;
+}
+.font-eng, .eng {
+    font-family: @font-eng;
+}
+
+html {
+    font-family: @before-font-family;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: @before-heading-font-family;
+    small {
+        font-family: @before-font-family;
+    }
+}
