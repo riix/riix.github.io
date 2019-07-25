@@ -243,7 +243,6 @@ $(function() {
 
             },
             inView: function(_bool) { // destroy 가 필요없음, refresh 로 대체
-                console.log(_bool);
                 if (_bool == false) return false; // destory 가 필요없음, refresh 로 대체
                 myInView = new InView('.container', settings.inView);
                 myInView.refresh();
