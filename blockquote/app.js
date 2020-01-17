@@ -13,6 +13,7 @@
 var APIKEY = 'AIzaSyAOf9a0vkHOh2leKjSQW1k2gzshSlfVyb0';
 var SPREADSHEETID = '1Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM';
 var CLIENTID = '672400523283-tohegrj6rgi41o1kr132v8ic5q90r001.apps.googleusercontent.com';
+var GAPI_SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly';
 var base = {};
 
 function getRandom(min, max) {
@@ -45,11 +46,11 @@ var doSplit = function() {
                 opacity: 0,
                 filter: "blur(" + getRandom(2, 5) + "px)"
             }, {
-                opacity: 1,
+                opacity: getRandom(0.5, 1),
                 filter: "blur(0px)"
             }], {
-                duration: 1000,
-                delay: getRandom(500, 3300),
+                duration: 500,
+                delay: getRandom(200, 1000),
                 fill: 'forwards'
             })
         })
@@ -58,11 +59,11 @@ var doSplit = function() {
 };
 
 $(function() {
-    $('#auth').on('click', function(e) {
-        authenticate().then(loadClient);
-    });
+    // $('#auth').on('click', function(e) {
+    //     authenticate().then(loadClient);
+    // });
     var run = function() {
-        console.info(base);
+        // console.info(base);
         var _idx = getRandomArbitrary(1, base.length);
         var _active = base[_idx];
         var _html = [
@@ -80,6 +81,11 @@ $(function() {
         if (gapi.client.sheets == undefined) {
             alert('please login');
             return false;
+        } else {
+            $('#auth').hide();
+            $('#run').show().on('click', function(e) {
+                run();
+            });
         }
         return gapi.client.sheets.spreadsheets.values.get({
                 "spreadsheetId": SPREADSHEETID,
@@ -102,7 +108,7 @@ $(function() {
     function authenticate() {
         return gapi.auth2.getAuthInstance()
             .signIn({
-                scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly"
+                scope: GAPI_SCOPE
             })
             .then(function() {
                     console.log("Sign-in successful");
@@ -118,19 +124,18 @@ $(function() {
             .then(function() {
                     // console.log("GAPI client loaded for API");
                     execute();
-                    $('#auth').hide();
-                    $('#run').show().on('click', function(e) {
-                        run();
-                    });
                 },
                 function(err) {
                     console.error("Error loading GAPI client for API", err);
                 });
     }
+
     // Make sure the client is loaded and sign-in is complete before calling this method.
     gapi.load("client:auth2", function() {
         gapi.auth2.init({
             client_id: CLIENTID
         });
+        loadClient();
+        // authenticate().then(loadClient);
     });
 });
