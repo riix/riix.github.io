@@ -14,6 +14,8 @@ var APIKEY = 'AIzaSyAOf9a0vkHOh2leKjSQW1k2gzshSlfVyb0';
 var SPREADSHEETID = '1Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM';
 var CLIENTID = '672400523283-tohegrj6rgi41o1kr132v8ic5q90r001.apps.googleusercontent.com';
 var GAPI_SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly';
+
+var idx = 0;
 var base = {};
 
 function getRandom(min, max) {
@@ -65,11 +67,17 @@ $(function() {
     var run = function() {
         // console.info(base);
         var _idx = getRandomArbitrary(1, base.length);
+        if (idx == _idx) {
+            idx = _idx - 1;
+            if (idx < 0) {
+                idx = base.length - 1;
+            }
+        }
         var _active = base[_idx];
         var _html = [
             '<q>' + _active[3] + '</q>',
             '<cite>',
-            '<span class="name">' + _active[1] + '</span>',
+            '<span class="name">' + _active[1] + '</span>,',
             '<span class="author">' + _active[2] + '</span>',
             '</cite>'
         ];

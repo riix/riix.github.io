@@ -20,30 +20,55 @@ html {
 }
 body {
     min-height: 100vh;
-    background: #000;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('./img/background.jpg');
+    background-size: cover;
+}
+body::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+}
+.frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    min-height: 600px;
+    background-color: rgba(0, 0, 0, 1);
+    padding: 40px;
 }
 blockquote {
     font-size: 2rem;
     margin: 0 auto;
-    max-width: 600px;
 }
 cite {
     display: block;
     text-align: right;
-    font-family: Verdana, Arial, sans-serif;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-size: .9rem;
     color: #aaa;
     font-style: normal;
 }
+cite span {
+    margin-left: 5px;
+}
 blockquote q {
-    font-family: Georgia, serif;
+    font-family: 'RIDIBatang', Georgia, serif;
     font-style: italic;
     letter-spacing: .1rem;
+    line-height: 1.5;
+    text-align: justify;
+    word-break: keep-all;
 }
 blockquote q span {
     will-change: opacity, filter;
@@ -51,16 +76,18 @@ blockquote q span {
     filter: blur(0px);
 }
 q {
+    position: relative;
     quotes: "“""”""‘""’";
 }
 q:before {
     content: open-quote;
     margin-right: .8rem;
+    transform: scale3d(2);
 }
 q:after {
     content: close-quote;
 }
 q:before, q:after {
     color: #ccc;
-    font-size: 4rem;
+    /* font-size: 4rem; */
 }
