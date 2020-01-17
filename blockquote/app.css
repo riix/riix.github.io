@@ -26,6 +26,7 @@ body {
     align-items: center;
     background: url('./img/background.jpg');
     background-size: cover;
+    overflow: hidden;
 }
 body::before {
     content: '';
@@ -36,6 +37,7 @@ body::before {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, .8);
+    filter: blur(100px);
 }
 .frame {
     display: flex;
@@ -44,10 +46,11 @@ body::before {
     max-width: 600px;
     width: 100%;
     min-height: 600px;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, .8);
     padding: 40px;
 }
 blockquote {
+    position: relative;
     font-size: 2rem;
     margin: 0 auto;
 }
