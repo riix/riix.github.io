@@ -4,6 +4,7 @@ function beep() {
 }
 
 var _questions = [
+    '산타클로즈',
     '엄마',
     '아빠',
     '서희',
@@ -63,53 +64,53 @@ var _questions = [
     '사랑하는 엄마 아빠'
 ];
 
-$(function(){
-  var $form = $('#form'),
-    $question = $('#question'),
-    $answer = $('#answer'),
-    $result = $('#result'),
-    _q = '',
-    _a = '';
+$(function() {
+    var $form = $('#form'),
+        $question = $('#question'),
+        $answer = $('#answer'),
+        $result = $('#result'),
+        _q = '',
+        _a = '';
 
-var dingdong = null;
+    var dingdong = null;
 
-var setDingdong = function(){
-    dingdong = new Audio('./mp3/dingdong.mp3');
-}
+    var setDingdong = function() {
+        dingdong = new Audio('./mp3/dingdong.mp3');
+    }
 
-function getRandomInArray(_arr) {
-    var _result = ['blue', 'red', 'green', 'orange', 'pink'];
-    _result = (typeof _arr === 'object') ? _arr : _result;
-    _result = _result[Math.floor(Math.random() * _result.length)];
-    return _result;
-}
+    function getRandomInArray(_arr) {
+        var _result = ['blue', 'red', 'green', 'orange', 'pink'];
+        _result = (typeof _arr === 'object') ? _arr : _result;
+        _result = _result[Math.floor(Math.random() * _result.length)];
+        return _result;
+    }
 
-  var reset = function(){
-     dingdong = null;
-    _q = getRandomInArray(_questions);
-    $question.val(_q);
-    $answer.val('').focus();
-  };
-  var onSubmit = function(){
-      _a = $answer.val();
-      if (_q == _a) {
-          $result.val('O 정답:' + _q + ' / ' + _a).addClass('correct').removeClass('incorrect');
-          setDingdong();
-          dingdong.play();
-      } else {
-          $result.val('X 오답:' + _q + ' / ' + _a).addClass('incorrect').removeClass('correct');
-      }
-      reset();
-  }
-  $answer.on('keydown', function(e){
-     console.log(e.keyCode);
-     beep();
-     if(e.keyCode == '13') {
-         onSubmit();
-     }
-  });
-  $form.on('submit', function(){
-    return false;
-  });
-  reset();
+    var reset = function() {
+        dingdong = null;
+        _q = getRandomInArray(_questions);
+        $question.val(_q);
+        $answer.val('').focus();
+    };
+    var onSubmit = function() {
+        _a = $answer.val();
+        if (_q == _a) {
+            $result.val('O 정답:' + _q + ' / ' + _a).addClass('correct').removeClass('incorrect');
+            setDingdong();
+            dingdong.play();
+        } else {
+            $result.val('X 오답:' + _q + ' / ' + _a).addClass('incorrect').removeClass('correct');
+        }
+        reset();
+    }
+    $answer.on('keydown', function(e) {
+        console.log(e.keyCode);
+        beep();
+        if (e.keyCode == '13') {
+            onSubmit();
+        }
+    });
+    $form.on('submit', function() {
+        return false;
+    });
+    reset();
 });

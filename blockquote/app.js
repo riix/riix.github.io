@@ -83,7 +83,7 @@ $(function() {
         }
         return gapi.client.sheets.spreadsheets.values.get({
                 "spreadsheetId": SPREADSHEETID,
-                "range": "A1:D5",
+                "range": "A1:D19",
                 "dateTimeRenderOption": "FORMATTED_STRING",
                 "majorDimension": "DIMENSION_UNSPECIFIED",
                 "valueRenderOption": "UNFORMATTED_VALUE"
