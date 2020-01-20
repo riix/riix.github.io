@@ -5,7 +5,7 @@
  */
 
 
-// https://riix.github.io/googleApi/test.html?456
+// https://riix.github.io/blockquote/index.html
 // https://console.developers.google.com/apis/dashboard?project=quickstart-1579075226656&hl=ko&pli=1
 // https://developers.google.com/sheets/api/reference/rest?apix=true
 // https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get?apix_params=%7B%22spreadsheetId%22%3A%221Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM%22%2C%22range%22%3A%22A1%3AD5%22%2C%22dateTimeRenderOption%22%3A%22FORMATTED_STRING%22%2C%22majorDimension%22%3A%22DIMENSION_UNSPECIFIED%22%2C%22valueRenderOption%22%3A%22UNFORMATTED_VALUE%22%7D
@@ -42,6 +42,7 @@ var doSplit = function() {
         quotewords = document.querySelectorAll("blockquote q span");
         fadeWords(quotewords);
     }
+
     function fadeWords(quotewords) {
         Array.prototype.forEach.call(quotewords, function(word) {
             let animate = word.animate([{
@@ -64,6 +65,8 @@ $(function() {
     // $('#auth').on('click', function(e) {
     //     authenticate().then(loadClient);
     // });
+    var _range = 'A1:D40';
+
     var run = function() {
         // console.info(base);
         var _idx = getRandomArbitrary(1, base.length);
@@ -97,35 +100,51 @@ $(function() {
                 run();
             });
         }
-        return gapi.client.sheets.spreadsheets.values.get({
+        var _result = gapi.client.sheets.spreadsheets.values.get({
                 "spreadsheetId": SPREADSHEETID,
-                "range": "A1:D19",
+                "range": _range,
                 "dateTimeRenderOption": "FORMATTED_STRING",
                 "majorDimension": "DIMENSION_UNSPECIFIED",
                 "valueRenderOption": "UNFORMATTED_VALUE"
             })
             .then(function(response) { // Handle the results here (response.result has the parsed body).
-                    // console.log("Response", response);
-                    // console.log(response.result);
-                    base = response.result.values;
-                    run();
-                },
-                function(err) {
-                    console.error("Execute error", err);
-                });
+                // console.log("Response", response);
+                // console.log(response.result);
+                base = response.result.values;
+                run();
+            },
+            function(err) {
+                console.error("Execute error", err);
+            });
+        return _result;
+    }
+
+    function getRow(_callback) { // 마지막행 구하기
+        var _endRow = 0;
+        gapi.client.sheets.spreadsheets.get({
+            spreadsheetId: SPREADSHEETID
+        }).then(function(response) {
+            _endRow = response.result.sheets[0].basicFilter.range.endRowIndex;
+            console.log('마지막행:' + _endRow);
+            _range = 'A1:D' + _endRow;
+            _callback.call();
+        }, function(response) {
+            console.log('Error: ' + response.result.error.message);
+            _callback.call();
+        });
     }
 
     function authenticate() {
         return gapi.auth2.getAuthInstance()
-            .signIn({
-                scope: GAPI_SCOPE
-            })
-            .then(function() {
-                    console.log("Sign-in successful");
-                },
-                function(err) {
-                    console.error("Error signing in", err);
-                });
+        .signIn({
+            scope: GAPI_SCOPE
+        })
+        .then(function() {
+                console.log("Sign-in successful");
+        },
+        function(err) {
+            console.error("Error signing in", err);
+        });
     }
 
     function loadClient() {
@@ -133,7 +152,8 @@ $(function() {
         return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
             .then(function() {
                     // console.log("GAPI client loaded for API");
-                    execute();
+                    // execute();
+                    getRow(execute);
                 },
                 function(err) {
                     console.error("Error loading GAPI client for API", err);
