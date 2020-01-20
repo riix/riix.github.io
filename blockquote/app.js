@@ -74,6 +74,7 @@ $(function() {
             }
         }
         var _active = base[_idx];
+        if (_active == undefined) return false;
         var _html = [
             '<q>' + _active[3] + '</q>',
             '<cite>',
@@ -81,7 +82,8 @@ $(function() {
             '<span class="author">' + _active[2] + '</span>',
             '</cite>'
         ];
-        $('#app').html(_html.join(''));
+        var _isLong = (_active[3].length >= 150); // 150자 이상일 경우
+        $('#app').toggleClass('is-long', _isLong).html(_html.join(''));
         doSplit();
     };
 
