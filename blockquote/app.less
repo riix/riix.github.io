@@ -47,6 +47,7 @@ body {
     width: 100%;
     min-height: 600px;
     background-color: rgba(0, 0, 0, .8);
+    border: solid 1px rgba(255, 255, 255, .9);
     padding: 40px;
 }
 blockquote {
@@ -69,6 +70,7 @@ blockquote {
             will-change: opacity, filter;
             opacity: 0;
             filter: blur(0px);
+            transition: all .2s ease-in-out 0s;
         }
         &:before {
             content: open-quote;
@@ -80,7 +82,6 @@ blockquote {
         }
         &:before, &:after {
             color: #ccc;
-            /* font-size: 4rem; */
         }
     }
 }

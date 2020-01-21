@@ -10,23 +10,31 @@
 // https://developers.google.com/sheets/api/reference/rest?apix=true
 // https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get?apix_params=%7B%22spreadsheetId%22%3A%221Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM%22%2C%22range%22%3A%22A1%3AD5%22%2C%22dateTimeRenderOption%22%3A%22FORMATTED_STRING%22%2C%22majorDimension%22%3A%22DIMENSION_UNSPECIFIED%22%2C%22valueRenderOption%22%3A%22UNFORMATTED_VALUE%22%7D
 
-var APIKEY = 'AIzaSyAOf9a0vkHOh2leKjSQW1k2gzshSlfVyb0';
-var SPREADSHEETID = '1Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM';
-var CLIENTID = '672400523283-tohegrj6rgi41o1kr132v8ic5q90r001.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAOf9a0vkHOh2leKjSQW1k2gzshSlfVyb0';
+var SPREADSHEET_ID = '1Ba9IBZR7Pb0APDiFl9PMjnzJg4hyPtZOhdrCskddCxM';
+var CLIENT_ID = '672400523283-tohegrj6rgi41o1kr132v8ic5q90r001.apps.googleusercontent.com';
 var GAPI_SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly';
 
 var idx = 0;
 var base = {};
 
-function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function getRandomArbitrary(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
 var doSplit = function() {
+    function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    function fadeWords() {
+        var $items = $('#app').find('span');
+        for (var i = 0; i < $items.length; i++) {
+            var $item = $items.eq(i);
+            var _delay = 200 + (80 * i);
+            $item.css({
+                opacity: getRandom(0.5, 1),
+                filter: 'blur(0px)',
+                transitionDelay: _delay + 'ms'
+            });
+        }
+    }
     function splitWords() {
         let quote = document.querySelector("blockquote q");
         quote.innerText.replace(/(<([^>]+)>)/ig, "");
@@ -39,36 +47,22 @@ var doSplit = function() {
                 quote.innerHTML += " ";
             }
         }
-        quotewords = document.querySelectorAll("blockquote q span");
-        fadeWords(quotewords);
-    }
-
-    function fadeWords(quotewords) {
-        Array.prototype.forEach.call(quotewords, function(word) {
-            let animate = word.animate([{
-                opacity: 0,
-                filter: "blur(" + getRandom(2, 5) + "px)"
-            }, {
-                opacity: getRandom(0.5, 1),
-                filter: "blur(0px)"
-            }], {
-                duration: 500,
-                delay: getRandom(200, 1000),
-                fill: 'forwards'
-            })
-        })
+        setTimeout(function(){
+            fadeWords();
+        }, 10);
     }
     splitWords();
 };
 
 $(function() {
-    // $('#auth').on('click', function(e) {
-    //     authenticate().then(loadClient);
-    // });
-    var _range = 'A1:D40';
 
+    var SPEADSHEET_RANGE = 'A1:D40';
+
+    function getRandomArbitrary(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+    
     var run = function() {
-        // console.info(base);
         var _idx = getRandomArbitrary(1, base.length);
         if (idx == _idx) {
             idx = _idx - 1;
@@ -101,8 +95,8 @@ $(function() {
             });
         }
         var _result = gapi.client.sheets.spreadsheets.values.get({
-                "spreadsheetId": SPREADSHEETID,
-                "range": _range,
+                "spreadsheetId": SPREADSHEET_ID,
+                "range": SPEADSHEET_RANGE,
                 "dateTimeRenderOption": "FORMATTED_STRING",
                 "majorDimension": "DIMENSION_UNSPECIFIED",
                 "valueRenderOption": "UNFORMATTED_VALUE"
@@ -122,11 +116,11 @@ $(function() {
     function getRow(_callback) { // 마지막행 구하기
         var _endRow = 0;
         gapi.client.sheets.spreadsheets.get({
-            spreadsheetId: SPREADSHEETID
+            spreadsheetId: SPREADSHEET_ID
         }).then(function(response) {
             _endRow = response.result.sheets[0].basicFilter.range.endRowIndex;
             console.log('마지막행:' + _endRow);
-            _range = 'A1:D' + _endRow;
+            SPEADSHEET_RANGE = 'A1:D' + _endRow;
             _callback.call();
         }, function(response) {
             console.log('Error: ' + response.result.error.message);
@@ -148,7 +142,7 @@ $(function() {
     }
 
     function loadClient() {
-        gapi.client.setApiKey(APIKEY);
+        gapi.client.setApiKey(API_KEY);
         return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
             .then(function() {
                     // console.log("GAPI client loaded for API");
@@ -163,7 +157,7 @@ $(function() {
     // Make sure the client is loaded and sign-in is complete before calling this method.
     gapi.load("client:auth2", function() {
         gapi.auth2.init({
-            client_id: CLIENTID
+            client_id: CLIENT_ID
         });
         loadClient();
         // authenticate().then(loadClient);
