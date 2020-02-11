@@ -9,7 +9,7 @@
  * http://www.codrops.com
  */
 ;
-(function($, window) {
+(function(window) {
 
     'use strict';
 
@@ -94,23 +94,9 @@
         this.initSetting();
     };
 
-    ElastiStack.prototype.build = function(_idx){
-        console.log(_idx);
-        console.log(this);
-
-        // this.items.splice(index, 0, el);
-        // this.insert(this.items[this.itemsCount - 1], 2);
-    };
 
     ElastiStack.prototype._initEvents = function() {
-        console.log('init events');
         var self = this;
-
-
-
-        // console.info(self.current);
-        this.build(self.current);
-
         this.draggie.on('dragStart', function(i, e, p) {
             self._onDragStart(i, e, p);
         });
@@ -123,7 +109,6 @@
     };
 
     ElastiStack.prototype._setStackStyle = function() {
-        console.log('get stack style');
         var item1 = this._firstItem(),
             item2 = this._secondItem(),
             item3 = this._thirdItem();
@@ -132,11 +117,13 @@
             item1.style.zIndex = 4;
             setTransformStyle(item1, is3d ? 'translate3d(0,0,0)' : 'translate(0,0)');
         }
+
         if (item2) {
             item2.style.opacity = 1;
             item2.style.zIndex = 3;
             setTransformStyle(item2, is3d ? 'translate3d(0,0,-60px)' : 'translate(0,0)');
         }
+
         if (item3) {
             item3.style.opacity = 1;
             item3.style.zIndex = 2;
@@ -145,7 +132,6 @@
     };
 
     ElastiStack.prototype._moveAway = function(instance) {
-        console.log('move away');
         // disable drag
         this._disableDragg();
 
@@ -216,7 +202,6 @@
     };
 
     ElastiStack.prototype._moveBack = function(instance) {
-        console.log('move back');
         var item2 = this._secondItem(),
             item3 = this._thirdItem();
 
@@ -292,18 +277,15 @@
 
     // returns true if x or y is bigger than distDragMax
     ElastiStack.prototype._outOfBounds = function(el) {
-        // console.log('out of bounds');
         return Math.abs(el.position.x) > this.options.distDragMax || Math.abs(el.position.y) > this.options.distDragMax;
     };
 
     // returns true if x or y is bigger than distDragBack
     ElastiStack.prototype._outOfSight = function(el) {
-        console.log('out of sight');
         return Math.abs(el.position.x) > this.options.distDragBack || Math.abs(el.position.y) > this.options.distDragBack;
     };
 
     ElastiStack.prototype._getTranslateVal = function(el) {
-        console.log('get translate val');
         var h = Math.sqrt(Math.pow(el.position.x, 2) + Math.pow(el.position.y, 2)),
             a = Math.asin(Math.abs(el.position.y) / h) / (Math.PI / 180),
             hL = h + this.options.distDragBack,
@@ -320,13 +302,11 @@
 
     // returns the first item in the stack
     ElastiStack.prototype._firstItem = function() {
-        // console.log('first item');
         return this.items[this.current];
     };
 
     // returns the second item in the stack
     ElastiStack.prototype._secondItem = function() {
-        // console.log('second item');
         if (this.itemsCount >= 2) {
             return this.current + 1 < this.itemsCount ? this.items[this.current + 1] : this.items[Math.abs(this.itemsCount - (this.current + 1))];
         }
@@ -334,7 +314,6 @@
 
     // returns the third item in the stack
     ElastiStack.prototype._thirdItem = function() {
-        // console.log('third item');
         if (this.itemsCount >= 3) {
             return this.current + 2 < this.itemsCount ? this.items[this.current + 2] : this.items[Math.abs(this.itemsCount - (this.current + 2))];
         }
@@ -342,7 +321,6 @@
 
     // returns the last item (of the first three) in the stack
     ElastiStack.prototype._lastItem = function() {
-        // console.log('last item');
         if (this.itemsCount >= 3) {
             return this._thirdItem();
         } else {
@@ -351,7 +329,6 @@
     };
 
     ElastiStack.prototype.turnRandom = function() {
-        console.log('turn random');
         if (this.options.isRandom) {
             var nowItem = this.items[this.current];
             this.items = [].slice.call(this.container.children);
@@ -378,42 +355,35 @@
     };
 
     ElastiStack.prototype.isRandom = function() {
-        console.log('is random');
         return this.options.isRandom;
     };
 
     ElastiStack.prototype.add = function(el) {
-        console.log('add');
         this.container.appendChild(el);
         this.items.push(el);
         this.initSetting();
     }
 
     ElastiStack.prototype.getSize = function() {
-        console.log('get size');
         return this.itemsCount;
     }
 
 
     ElastiStack.prototype.getCurrent = function() {
-        console.log('get current');
         return this.current;
     }
 
     ElastiStack.prototype.getCurrentItem = function() {
-        console.log('get current item');
         return this.items[this.current];
     }
 
     ElastiStack.prototype.insert = function(el, index) {
-        console.log('insert');
         this.container.insertBefore(el, this.container.childNodes[index]);
         this.items.splice(index, 0, el);
         this.initSetting();
     }
 
     ElastiStack.prototype.remove = function(index) {
-        console.log('remove');
         if (this.items.length === 0) {
             return;
         }
@@ -432,4 +402,4 @@
     // add to global namespace
     window.ElastiStack = ElastiStack;
 
-})(jQuery, window);
+})(window);
