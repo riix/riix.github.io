@@ -1,0 +1,149 @@
+.rem(@size) {
+    @px : unit(@size, px);
+    @rem: unit(@size * 0.1, rem);
+}
+.font-size-rem(@size) {
+    .rem(@size);
+    font-size: @px;
+    font-size: @rem;
+}
+:root {
+    font-size: 62.5%; // 10px;
+    @media (min-width: 375px) {
+        font-size: 73.2%;
+    }
+    @media (min-width: 411px) {
+        font-size: 80.5%;
+    }
+    @media (min-width: 414px) {
+        font-size: 83%;
+    }
+    @media (min-width: 568px) {
+        font-size: 111%;
+    }
+    @media (min-width: 667px) {
+        font-size: 130%;
+    }
+    @media (min-width: 736px) {
+        font-size: 144%;
+    }
+    @media (min-width: 768px) {
+        font-size: 150%;
+    }
+    @media (min-width: 812px) {
+        font-size: 159%;
+    }
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body, p, th, td, input, li {
+    .font-size-rem(14);
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    .grid {
+        &::after {
+            content: '';
+            display: table;
+            clear: both;
+            overflow: hidden;
+        }
+    }
+    .col {
+        float: left;
+        width: 33.33%;
+        background-color: #ddd;
+        .module {
+            padding: 1rem;
+            width: 60px;
+            border: solid 1px #000;
+        }
+    }
+}
+.face-wrap {
+    position: relative;
+}
+.face {
+    position: absolute;
+    box-sizing: border-box;
+    border: solid 1px #000;
+    border-radius: 100%;
+    .rem(320);
+    width: @rem;
+    height: @rem;
+}
+.eye {
+    position: absolute;
+    border: solid 1px #000;
+    border-radius: 100%;
+    & {
+        .rem(80);
+        top: @rem;
+    }
+    & {
+        .rem(60);
+        width: @rem;
+        height: @rem;
+    }
+    &.left {
+        .rem(60);
+        left: @rem;
+    }
+    &.right {
+        .rem(60);
+        right: @rem;
+    }
+}
+&.nose {
+    position: absolute;
+    background-color: #000;
+    width: 3px;
+    & {
+        .rem(10);
+        width: 0;
+        border: solid @rem #000;
+    }
+    & {
+        .rem(140);
+        top: @rem;
+    }
+    & {
+        .rem(160);
+        left: @rem;
+        transform: translateX(-50%);
+    }
+    & {
+        .rem(30);
+        height: @rem;
+    }
+}
+&.mouth {
+    position: absolute;
+    border: solid 1px #000;
+    background-color: #eee;
+    & {
+        .rem(60);
+        left: @rem;
+        right: @rem;
+    }
+    & {
+        .rem(80);
+        bottom: @rem;
+    }
+    & {
+        .rem(10);
+        height: @rem;
+    }
+}
+.demo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #eee;
+    padding: 20px;
+}
