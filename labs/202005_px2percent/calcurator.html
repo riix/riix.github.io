@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<style>
+html, body { margin: 0; padding: 10px; }
+* { font-size: 14px; line-height: 1.44; }
+h3 { margin: 20px 0 15px; font-size: 16px; }
+h4 { margin: 10px 0 10px; font-size: 14px; }
+input { margin: 0; }
+input[type="number"], input[type="text"], textarea {
+    padding: 5px;
+    border: solid 1px #ddd;
+}
+input[type="number"],
+input[type="text"] { width: 80px; text-align: right; -moz-appearance: textfield; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="text"] { text-align: left; }
+input.large { width: 300px; }
+label input { margin-left: 10px; }
+img { vertical-align: middle; }
+textarea { box-sizing: border-box; width: 100%; max-width: 900px; height: 80px; }
+fieldset { box-sizing: border-box; margin: 15px 0; padding: 20px 20px 20px; width: 100%; max-width: 900px; border: solid 1px #ddd; }
+p { margin: 5px 0 10px; padding: 0; }
+small { font-size: 11px; }
+a.gaip {position:absolute; display:block; text-indent:-99999px; background:rgba(0,0,255,.5);}
+</style>
+</head>
+<body>
+<h3>버튼 좌표 px % 변환기</h3>
+<div>
+    <h4>대상 이미지</h4>
+    <div>
+        <label>경로<input type="file" id="file" class="large" maxlength="100" value="calcurator_sample_01.png" placeholder="이미지명" accept=".gif, .jpg, .png" /></label>
+        <p>
+            <small>같은 경로의 이미지만 취급</small>
+        </p>
+    </div>
+    <label>너비<input type="number" id="width" maxlength="4" value="1160" placeholder="0" /></label>
+    <label>높이<input type="number" id="height" maxlength="4" value="916" placeholder="0" /></label>
+</div>
+<fieldset>
+    <legend>버튼 #1</legend>
+    <div>
+        <div>
+            <label>X 좌<input type="number" id="left" maxlength="4" value="390" placeholder="0" /></label>
+            <label>Y 상<input type="number" id="top" maxlength="4" value="700" placeholder="0" /></label>
+        </div>
+        <div style="margin-top: 20px; margin-left: 200px;">
+            <label>X 우<input type="number" id="right" maxlength="4" value="770" placeholder="0" /></label>
+            <label>Y 하<input type="number" id="bottom" maxlength="4" value="790" placeholder="0" /></label>
+        </div>
+    </div>
+    <div>
+        <h4>커스텀데이터</h4>
+        <div>
+            <label>속성<input type="text" id="data" maxlength="4" value="dpnm" placeholder="dpnm" /></label>
+            <label>내용<input type="text" id="dataVal" class="large" maxlength="30" value="가입신청" placeholder="필드내용" /></label>
+        </div>
+    </div>
+</fieldset>
+<div>
+    <h4>결과</h4>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+</div>
+<div id="app" style="position: relative; width: 100%; min-width: 320px; max-width: 1160px; line-height: 1.2;">
+    <img id="image" src="calcurator.png" style="width: 100%; max-width: 100%;" />
+</div>
+<script src="http://stg.lghellovision.net/front/web/js/jquery-1.11.1.min.js"></script>
+<script src="calcurator.js"></script>
+</body>
+</html>
