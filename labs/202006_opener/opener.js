@@ -82,17 +82,25 @@ $(function(){
     $reset.on('click', function(e){
         onReset(e);
     });
+    var getEngNum = function(_val) {
+        var _regex = /[^a-zA-Z0-9]/g;
+        var _result = _val.split('//')[1];
+        _result = _result.split('.');
+        var last = _result.pop(), //  확장자 제거
+            prev = _result.join();
+        _result = prev.replace(_regex, "");
+        return _result;
+    }
     $document.on('click', 'a[target="_blank"]', function(e){
         e.preventDefault();
         var $this = $(e.target);
         $this = ($this.is('a')) ? $this : $this.closest('a');
         var $textarea = $this.closest('.module').find('textarea');
         var _href = $this.attr('href'),
-            _name = _href.split('/images/')[1],
             _width = ($textarea.data('mobile') === true) ? 720 : 1160,
             _left = screen.width / 2 - (_width / 2),
             _height = screen.height - 180;
-        _name = _name.split('.')[0];
+        var _name = getEngNum(_href);
         window.open(_href, _name, 'width=' + _width + ', height=' + _height + ', scrollbars=yes, top=10, left=' + _left);
     });
     init();
