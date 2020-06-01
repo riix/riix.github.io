@@ -6,6 +6,15 @@ $(function(){
         $reset = $app.find('.reset');
     var _result = [];
     var timestamp = new Date().getTime();
+    var getEngNum = function(_val) {
+        var _regex = /[^a-zA-Z0-9]/g;
+        var _result = _val.split('//')[1];
+        _result = _result.split('.');
+        var last = _result.pop(), //  확장자 제거
+            prev = _result.join();
+        _result = prev.replace(_regex, "");
+        return _result;
+    }
     var setCookie = function($el, _value) {
         var _name = $el.data('name');
         $.cookie(_name, _value, { expires: 7 });
@@ -82,15 +91,6 @@ $(function(){
     $reset.on('click', function(e){
         onReset(e);
     });
-    var getEngNum = function(_val) {
-        var _regex = /[^a-zA-Z0-9]/g;
-        var _result = _val.split('//')[1];
-        _result = _result.split('.');
-        var last = _result.pop(), //  확장자 제거
-            prev = _result.join();
-        _result = prev.replace(_regex, "");
-        return _result;
-    }
     $document.on('click', 'a[target="_blank"]', function(e){
         e.preventDefault();
         var $this = $(e.target);
