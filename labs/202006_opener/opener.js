@@ -41,6 +41,10 @@ $(function(){
             $preview = $module.find('.preview'),
             _path = $textarea.data('path'),
             _values = $textarea.val();
+
+        _values = _values.replace(/^\s/gm, ''); // 빈줄 제거
+        _values = _values.replace(/\r\n$/g, ''); // 마지막 공백 제거
+
         setCookie($textarea, _values);
         _values = _values.split('\n');
         if (_values[0].length < 1) return false;
@@ -48,7 +52,7 @@ $(function(){
             var _this = _values[i];
             if (_this.length > 0) {
                 _this = _path + _this.split('images/')[1];
-                _result.push(_this);                
+                _result.push(_this);
             }
         }
         setLinks($links, _result);
@@ -72,7 +76,6 @@ $(function(){
             }
         }
     };
-    init();
     $submit.on('click', function(e){
         onSubmit(e);
     });
@@ -92,4 +95,5 @@ $(function(){
         _name = _name.split('.')[0];
         window.open(_href, _name, 'width=' + _width + ', height=' + _height + ', scrollbars=yes, top=10, left=' + _left);
     });
+    init();
 });
