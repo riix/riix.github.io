@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>opener</title>
+<style>
+.container {}
+.grid {}
+.grid::after { content: ''; display: table; overflow: hidden; clear: both; }
+.col { float: left; width: 50%; }
+.module { margin: 10px; }
+.module button { float: right; }
+h3 { font-size: 16px; }
+textarea { width: 100%; height: 240px; margin-bottom: 10px; border: solid 1px #ccc; }
+button { margin: 0; padding: 10px; font-size: 16px; }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <h1>배포 이미지 확인</h1>
+        <div class="grid">
+            <div class="col">
+                <div class="module">
+                    <h3>개발 PC</h3>
+                    <textarea name="" id="" cols="30" rows="10" data-path="http://stg.lghellovision.net/event/images/"></textarea>
+                    <button class="button">확인</button>
+                    <div class="links"></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="module">
+                    <h3>상용 PC</h3>
+                    <textarea name="" id="" cols="30" rows="10" data-path="http://lghellovision.net/event/images/"></textarea>
+                    <button class="button">확인</button>
+                    <div class="links"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <div class="module">
+                    <h3>개발 모바일</h3>
+                    <textarea name="" id="" cols="30" rows="10" data-path="http://mstg.lghellovision.net/event/images/"></textarea>
+                    <button class="button">확인</button>
+                    <div class="links"></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="module">
+                    <h3>상용 모바일</h3>
+                    <textarea name="" id="" cols="30" rows="10" data-path="http://m.lghellovision.net/event/images/"></textarea>
+                    <button class="button">확인</button>
+                    <div class="links"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="opener.js"></script>
+</body>
+</html>
