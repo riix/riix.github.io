@@ -46,8 +46,10 @@ $(function(){
         if (_values[0].length < 1) return false;
         for (var i = 0; i < _values.length; i++) {
             var _this = _values[i];
-            _this = _path + _this.split('images/')[1];
-            _result.push(_this);
+            if (_this.length > 0) {
+                _this = _path + _this.split('images/')[1];
+                _result.push(_this);                
+            }
         }
         setLinks($links, _result);
         checkLinks($preview, _result);
