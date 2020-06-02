@@ -21,7 +21,8 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 input[type="text"] { text-align: left; }
-input.large { width: 300px; }
+input.large { width: 600px; }
+input.xlarge { width: 90%; }
 label input { margin-left: 10px; }
 img { vertical-align: middle; }
 textarea { box-sizing: border-box; width: 100%; max-width: 900px; height: 80px; }
@@ -38,26 +39,25 @@ a.gaip {position:absolute; display:block; text-indent:-99999px; background:rgba(
 <h3>버튼 좌표 px % 변환기</h3>
 <div>
     <h4>대상 이미지</h4>
-    <div>
-        <label>경로<input type="text" id="file" class="large" maxlength="100" value="calcurator_sample_01.png" placeholder="이미지명" accept=".gif, .jpg, .png" /></label>
-        <p>
-            <small>같은 경로의 이미지만 취급</small>
-        </p>
-    </div>
-    <label>너비<input type="number" id="width" maxlength="4" value="1160" placeholder="0" /></label>
-    <label>높이<input type="number" id="height" maxlength="4" value="916" placeholder="0" /></label>
+    <p>
+        <label>경로<input type="text" id="imageSrc" class="large" maxlength="500" value="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" placeholder="이미지명" accept=".gif, .jpg, .png" /></label>
+    </p>
+    <p>
+        <label>너비<input type="number" id="width" maxlength="4" value="1160" placeholder="0" /></label>
+        <label>높이<input type="number" id="height" maxlength="4" value="916" placeholder="0" /></label>
+    </p>
 </div>
 <fieldset>
     <legend>버튼 #1</legend>
     <div>
-        <div>
+        <p>
             <label>X 좌<input type="number" id="left" maxlength="4" value="390" placeholder="0" /></label>
             <label>Y 상<input type="number" id="top" maxlength="4" value="700" placeholder="0" /></label>
-        </div>
-        <div style="margin-top: 20px; margin-left: 200px;">
+        </p>
+        <p style="margin-top: 20px; margin-left: 200px;">
             <label>X 우<input type="number" id="right" maxlength="4" value="770" placeholder="0" /></label>
             <label>Y 하<input type="number" id="bottom" maxlength="4" value="790" placeholder="0" /></label>
-        </div>
+        </p>
     </div>
     <div>
         <h4>커스텀데이터</h4>
@@ -72,7 +72,7 @@ a.gaip {position:absolute; display:block; text-indent:-99999px; background:rgba(
     <textarea name="" id="" cols="30" rows="10"></textarea>
 </div>
 <div id="app">
-    <img id="image" src="calcurator.png" />
+    <img id="image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
 </div>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
