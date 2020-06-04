@@ -33,7 +33,7 @@ $(function(){
 
         var defaults = {
             image: {
-                src: "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+                src: "",
                 width: 1,
                 height: 1
             },
@@ -127,7 +127,9 @@ $(function(){
 
         var setImage = function(e){ // 이미지 프로퍼티 처리
             imageProp.src = getInputValue($src);
-            $image.attr('src', imageProp.src);
+            var _src = (imageProp.src == '') ? 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' : imageProp.src;
+            $image.attr('src', _src);
+            $image.css('height', (imageProp.src == '') ? '30px' : 'auto');
             var _core = function(){
                 var _width = $image[0].naturalWidth,
                     _height = $image[0].naturalHeight;
