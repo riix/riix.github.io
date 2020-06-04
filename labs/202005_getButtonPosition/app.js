@@ -81,7 +81,7 @@ $(function(){
             }
         };
 
-        var getTTT = function(){
+        var getItemsProperties = function(){
             var _html = ''; // 초기화
             var _length = $items.children().length;
             itemsProp = [];
@@ -116,7 +116,7 @@ $(function(){
             imageProp = getImageProp();
             $preview.find('a').remove(); // 버튼 재배치
 
-            var itemsProp = getTTT();
+            var itemsProp = getItemsProperties();
             var _html = getHtml(itemsProp);
 
             $preview.append($(_html));
@@ -160,8 +160,24 @@ $(function(){
                     alert('최대 5개 까지만 생성할 수 있지요');
                 }
             };
+            var onSample = function(e){
+                setStorage('imageProp', {"src":"http://stg.lghellovision.net/event/images/tps_20200603_02.png","width":1160,"height":2538});
+                setStorage('itemsProp', [
+                    {"top":953,"left":381,"right":781,"bottom":1043,"dataAttr":"dpnm","dataAttrVal":"HD 이코노미 + 헬로tv WiFi(무비무비 이벤트)"},
+                    {"top":2327,"left":381,"right":781,"bottom":2417,"dataAttr":"dpnm","dataAttrVal":"UHD 베이직 + 헬로tv WiFi(무비무비 이벤트)"}
+                ]);
+                location.reload(true);
+            };
+            var onReset = function(e){
+                localStorage.removeItem('imageProp');
+                localStorage.removeItem('itemsProp');
+                location.reload(true);
+            };
             $document.on('click', '.remove', onRemove);
             $document.on('click', '.add', onAdd);
+            $document.on('click', '.sample', onSample);
+            $document.on('click', '.reset', onReset);
+
             $document.on('keypress focusout', '.src', setImage);
             $document.on('keyup', '.module input', function(){
                 run();
