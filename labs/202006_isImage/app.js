@@ -42,8 +42,6 @@ $(function(){
                     _path = $textarea.data('path'),
                     _values = $textarea.val();
 
-
-
                 var checkLinks = function($el, _arr){
                     var _html = '<ul class="uk-list uk-list-collapse uk-list-striped list-image">'
                     for (var i = 0; i < _arr.length; i++) {
@@ -66,7 +64,7 @@ $(function(){
                 for (var i = 0; i < _values.length; i++) {
                     var _this = _values[i];
                     if (_this.length > 0) {
-                        _this = _path + _this.split('images/')[1];
+                        _this = _path + _this.split('WebContent/')[1];
                         returnList.push(_this);
                     }
                 }
