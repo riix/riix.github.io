@@ -1,0 +1,28 @@
+#container { padding: 40px 0 40px; }
+.uk-grid-item-match, .uk-grid-match > * { display: block; }
+a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
+
+* + .uk-form-controls { margin-top: 10px; }
+
+.button.remove { position: absolute; top: 0; right: 0; margin: 20px; }
+
+.action { text-align: center; }
+
+.module { position: relative; }
+.module legend::before { display: inline-block; content: "버튼 #1"; }
+.module:nth-child(2) legend::before { content: "버튼 #2"; }
+.module:nth-child(3) legend::before { content: "버튼 #3"; }
+.module:nth-child(4) legend::before { content: "버튼 #4"; }
+.module:nth-child(5) legend::before { content: "버튼 #5"; }
+
+.module .remove { display: none; }
+.module:last-child .remove { display: block; }
+.module:first-child .remove { display: none; }
+
+fieldset { margin: 0; padding: 0; border: 0; }
+
+.preview-wrap { text-align: center; }
+#preview { position: relative; display: inline-block; margin: 0 auto; width: 100%; max-width: 1160px; min-width: 320px; line-height: 1.2; }
+#preview img { width: 100%; max-width: 100%; }
+
+a.gaip {position:absolute; display:block; text-indent:-99999px; background:rgba(0,0,255,.5);}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>HV 플로팅 버튼 좌표 계산기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/css/uikit.min.css" /><!-- UIkit CSS -->
+<link rel="stylesheet" href="app.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit.min.js"></script><!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="uk-container container">
+        <h2>HV 플로팅 버튼 좌표 계산기</h2>
+        <div class="container uk-margin-large">
+            <h3>바탕 이미지</h3>
+            <div id="images" class="wrap uk-form-horizontal uk-margin" >
+                <div class="uk-margin">
+                    <label class="uk-form-label">경로</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="src" class="uk-input uk-form-small src" maxlength="500" placeholder="이미지명" accept=".gif, .jpg, .png" />
+                    </div>
+                    <label class="uk-form-label">너비</label>
+                    <div class="uk-form-controls  uk-form-controls-text">
+                        <input type="text" id="width" class="uk-input uk-form-small uk-width-1-5 width" maxlength="4" value="0" placeholder="0" />
+                    </div>
+                    <label class="uk-form-label">높이</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <input type="text" id="height" class="uk-input uk-form-small uk-width-1-5 height" maxlength="4" value="0" placeholder="0" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div id="items" class="wrap">
+                <div class="module uk-card uk-card-default uk-card-body uk-form-horizontal uk-margin">
+                    <fieldset>
+                        <legend class="uk-card-title"></legend>
+                        <div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label">X 좌</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small uk-width-1-4 left number" maxlength="4" value="0" placeholder="0" />
+                                </div>
+                                <label class="uk-form-label">Y 상</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small uk-width-1-4 top number" maxlength="4" value="0" placeholder="0" />
+                                </div>
+                            </p>
+                            <div class="uk-margin">
+                                <label class="uk-form-label">X 우</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small uk-width-1-4 right number" maxlength="4" value="0" placeholder="0" />
+                                </div>
+                                <label class="uk-form-label">Y 하</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small uk-width-1-4 bottom number" maxlength="4" value="0" placeholder="0" />
+                                </div>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label">속성</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small uk-width-1-3 dataAttr" maxlength="4" value="" placeholder="dpnm" />
+                                </div>
+                                <label class="uk-form-label">내용</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-input uk-form-small dataAttrVal large" maxlength="30" value="" placeholder="필드내용" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <a class="uk-icon-link button remove" uk-icon="icon: close; ratio: 1.5;"></a>
+                </div>
+            </div>
+            <div class="uk-margin action">
+                <a href="javascript:;" class="uk-button uk-button-primary button add"><span uk-icon="icon: plus; ratio: 1"></span> 플로팅 버튼 추가</a>
+            </div>
+        </div>
+        <div class="container">
+            <div id="result" class="wrap uk-card uk-card-secondary uk-card-body">
+                <h4 class="uk-card-title">결과</h4>
+                <textarea class="uk-textarea uk-form-small" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="container uk-margin preview-wrap">
+            <div id="preview" class="wrap">
+                <img id="image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+            </div>
+        </div>
+    </div>
+    <a href="#" uk-totop uk-scroll></a>
+</div>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
