@@ -21,25 +21,29 @@
 
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-2@s uk-column-divider">
-                    <div>
-                        <canvas id="chart-area" width="480" height="360"></canvas>
-                    </div>
-                    <div>
-                        <div class="uk-grid-small" uk-grid>
-                            <div class="uk-width-expand" uk-leader="fill: -">
-                                <span>Earned today</span>
-                            </div>
-                            <div>
-                                <span class="uk-badge">$ 20.90</span>
-                            </div>
+                    <div class="col charts nth-child-1">
+                        <div class="module">
+                            <canvas id="chart-area" width="480" height="360"></canvas>
                         </div>
-                        <div class="uk-grid-small" uk-grid>
-                            <div class="uk-width-expand" uk-leader="fill: -">
-                                <span>Workdays left</span>
-                                <span class="uk-visible@m">until the next payday</span>
+                    </div>
+                    <div class="col summary nth-child-2">
+                        <div class="module">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>Earned today</span>
+                                </div>
+                                <div>
+                                    <span class="uk-badge">$ 20.90</span>
+                                </div>
                             </div>
-                            <div>
-                                <span class="uk-badge">100 Day</span>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>Workdays left</span>
+                                    <span class="uk-visible@m">until the next payday</span>
+                                </div>
+                                <div>
+                                    <span class="uk-badge">100 Day</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +86,7 @@
 
 
             <div class="uk-margin-large">
-                <ul uk-accordion>
+                <ul id="settings" uk-accordion>
                     <li class="uk-open">
                         <a class="uk-accordion-title" href="#">Settings</a>
                         <div class="uk-accordion-content">
@@ -91,25 +95,25 @@
                                     <div class="uk-width-1-4@s">
                                         <label class="uk-form-label">Start</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="" type="time" placeholder="" />
+                                            <input class="uk-input startTime" id="startTime" type="time" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="uk-width-1-4@s">
                                         <label class="uk-form-label">End</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="" type="time" placeholder="" />
+                                            <input class="uk-input endTime" id="endTime" type="time" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="uk-width-1-4@s">
                                         <label class="uk-form-label">Payday</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="" type="number" placeholder="1" />
+                                            <input class="uk-input payDay" id="payDay" type="text" placeholder="01" maxlength="2" />
                                         </div>
                                     </div>
                                     <div class="uk-width-1-4@s">
                                         <label class="uk-form-label">Total</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="" type="number" placeholder="10000000" />
+                                            <input class="uk-input totalMoney" id="totalMoney" type="text" data-format="money" maxlength="10" placeholder="10000000" />
                                         </div>
                                     </div>
                                 </div>

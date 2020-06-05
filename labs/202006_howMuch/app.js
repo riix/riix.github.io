@@ -1,185 +1,151 @@
 'use strict';
 
-window.chartColors = {
-	red: 'rgb(255, 99, 132)',
-	orange: 'rgb(255, 159, 64)',
-	yellow: 'rgb(255, 205, 86)',
-	green: 'rgb(75, 192, 192)',
-	blue: 'rgb(54, 162, 235)',
-	purple: 'rgb(153, 102, 255)',
-	grey: 'rgb(201, 203, 207)'
-};
-
 (function(global) {
-
-	var MONTHS = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-	];
-
-	var COLORS = [
-		'#4dc9f6',
-		'#f67019',
-		'#f53794',
-		'#537bc4',
-		'#acc236',
-		'#166a8f',
-		'#00a950',
-		'#58595b',
-		'#8549ba'
-	];
-
-	var Samples = global.Samples || (global.Samples = {});
-	var Color = global.Color;
-
-	Samples.utils = {
-		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
-		srand: function(seed) {
-			this._seed = seed;
-		},
-
-		rand: function(min, max) {
-			var seed = this._seed;
-			min = min === undefined ? 0 : min;
-			max = max === undefined ? 1 : max;
-			this._seed = (seed * 9301 + 49297) % 233280;
-			return min + (this._seed / 233280) * (max - min);
-		},
-
-		numbers: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 1;
-			var from = cfg.from || [];
-			var count = cfg.count || 8;
-			var decimals = cfg.decimals || 8;
-			var continuity = cfg.continuity || 1;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var data = [];
-			var i, value;
-
-			for (i = 0; i < count; ++i) {
-				value = (from[i] || 0) + this.rand(min, max);
-				if (this.rand() <= continuity) {
-					data.push(Math.round(dfactor * value) / dfactor);
-				} else {
-					data.push(null);
-				}
-			}
-
-			return data;
-		},
-
-		labels: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 100;
-			var count = cfg.count || 8;
-			var step = (max - min) / count;
-			var decimals = cfg.decimals || 8;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var prefix = cfg.prefix || '';
-			var values = [];
-			var i;
-
-			for (i = min; i < max; i += step) {
-				values.push(prefix + Math.round(dfactor * i) / dfactor);
-			}
-
-			return values;
-		},
-
-		months: function(config) {
-			var cfg = config || {};
-			var count = cfg.count || 12;
-			var section = cfg.section;
-			var values = [];
-			var i, value;
-
-			for (i = 0; i < count; ++i) {
-				value = MONTHS[Math.ceil(i) % 12];
-				values.push(value.substring(0, section));
-			}
-
-			return values;
-		},
-
-		color: function(index) {
-			return COLORS[index % COLORS.length];
-		},
-
-		transparentize: function(color, opacity) {
-			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
-			return Color(color).alpha(alpha).rgbString();
-		}
-	};
-
-	// DEPRECATED
-	window.randomScalingFactor = function() {
-		return Math.round(Samples.utils.rand(-100, 100));
-	};
-
-	// INITIALIZATION
-
-	Samples.utils.srand(Date.now());
-
-
-
+	var Base = global.Base || (global.Base = {});
 }(this));
 
 $(function() {
 
-    var $document = $(document);
+	var optionChart = {
+		type: 'doughnut',
+		data: {
+			datasets: [{
+				data: [
+					0,
+					0
+				],
+				backgroundColor: [
+					'#1e87f0',
+					'#f8f8f8'
+				]
+			}],
+			labels: [
+				'0',
+				'0'
+			]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				position: 'bottom',
+			},
+			title: {
+				display: true,
+				text: 'Today'
+			},
+			animation: {
+				animateScale: true,
+				animateRotate: true
+			}
+		}
+	};
+
+	function formatNumber(num) {
+		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+	}
 
     var appHowMuch = function() {
 
-		var config = {
-			type: 'doughnut',
-			data: {
-				datasets: [{
-					data: [
-                        200000,
-    					800000
-					],
-					backgroundColor: [
-						'#1e87f0',
-                        '#f8f8f8'
-					],
-					label: 'Dataset 1'
-				}],
-				labels: [
-                    '2,000,000',
-					'800,000'
-				]
-			},
-			options: {
-				responsive: true,
-                legend: {
-					position: 'bottom',
-				},
-				title: {
-					display: true,
-					text: 'Today'
-				},
-				animation: {
-					animateScale: true,
-					animateRotate: true
+		var $document = $(document),
+			$app = $('#app'),
+			$settings = null,
+			$settingsForm = null;
+
+		var payDay = {
+			"startTime": 0,
+			"endTime": 0,
+			"payDay": 0,
+			"totalMoney": 0
+		};
+
+		var result = {
+			"currentTime": 0,
+			"earnedToday": 0,
+			"leftWorkday": 0,
+			"leftWorkdayPercent": 0,
+			"nextPayDay": 0,
+			"countDown": 0
+		};
+
+		var ctx = document.getElementById('chart-area').getContext('2d'); // 차트 객체
+
+		var setStorage = function(){
+			localStorage.setItem('payday', JSON.stringify(payDay));
+			console.info(payDay);
+		};
+
+		var getStorage = function(){
+			var obj = JSON.parse(localStorage.getItem('payday'));
+			if (obj !== null) {
+				payDay = obj;
+				console.log('loaded', payDay);
+			}
+		};
+
+		var setProp = function(_id, _val){
+			for (var prop in payDay) {
+				if (payDay.hasOwnProperty(prop)) {
+					if (prop == _id) {
+						payDay[prop] = _val;
+					}
 				}
 			}
 		};
 
-        var ctx = document.getElementById('chart-area').getContext('2d');
-        window.myDoughnut = new Chart(ctx, config);
+		var onLoad = function(){
+			getStorage();
+			for (var prop in payDay) {
+				if (payDay.hasOwnProperty(prop)) {
+					$settings.find('.' + prop).val(payDay[prop]);
+				}
+			}
+		};
+
+		function returnNumberFormat(_val){
+			if (_val !== '') {
+				var _result = parseInt(_val.replace(/\D/g,''),10);
+				return _result;
+			}
+			return
+		}
+
+		var onChange = function(e){
+			var $this = $(e.target);
+			$this = ($this.is('input')) ? $this : $this.closest('input');
+			var _type = $this.data('type');
+			var _format = $this.data('format');
+			var _val = $this.val() || '';
+			_val = (_type == 'number') ? _val * 1 : _val;
+
+			if (_format == 'money' && _val !== '') {
+				$this.val(returnNumberFormat(_val));
+			}
+
+			setProp($this.attr('id'), _val);
+			setStorage();
+		};
+
+		var setChart = function(){
+			window.myChart = new Chart(ctx, optionChart);
+		};
+
+		var setHandler = function(){
+			$app.on('keyup change', 'input', function(e){
+				onChange(e);
+			});
+		};
+
+		var init = function(){
+
+			$settings = $('#settings');
+			$settingsForm = $settings.find('input');
+
+			setChart();
+			setHandler();
+			onLoad();
+		};
+
+		init();
 
     };
 
