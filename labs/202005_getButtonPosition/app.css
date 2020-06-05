@@ -1,4 +1,4 @@
-#container { padding: 40px 0 40px; }
+#container { padding: 40px 0 40px; min-width: 320px; }
 .uk-grid-item-match, .uk-grid-match > * { display: block; }
 a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
 
