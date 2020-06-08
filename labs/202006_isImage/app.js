@@ -20,7 +20,7 @@ $(function(){
         var $document = $(document),
             $app = $('#app');
         var returnList = [];
-        var sortIndex = [0, 1, 2, 3]; // 정렬 인덱스
+        var sortIndex = [0, 1, 2, 3, 4, 5, 6, 7]; // 정렬 인덱스
         var timestamp = new Date().getTime();
 
         var getListHtml = function(_arr){ // 파일 목록 html 구하기
@@ -65,6 +65,14 @@ $(function(){
                     var _this = _values[i];
                     if (_this.length > 0) {
                         _this = _path + _this.split('WebContent/')[1];
+
+                        // 이벤트
+                        if (_this.match('front/mobile/event/')) _this = _this.replace('front/mobile/event/','event/');
+
+                        // 이유있는 제안
+                        if (_this.match('front/web/open/')) _this = _this.replace('front/web/open/','front/web/open/');
+                        if (_this.match('front/mobile/open/')) _this = _this.replace('front/mobile/open/','front/mobile/open/');
+
                         returnList.push(_this);
                     }
                 }

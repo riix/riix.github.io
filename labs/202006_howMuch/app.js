@@ -40,10 +40,6 @@ $(function() {
 		}
 	};
 
-	function formatNumber(num) {
-		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-	}
-
     var appHowMuch = function() {
 
 		var $document = $(document),
@@ -58,27 +54,20 @@ $(function() {
 			"totalMoney": 0
 		};
 
-		var result = {
-			"currentTime": 0,
-			"earnedToday": 0,
-			"leftWorkday": 0,
-			"leftWorkdayPercent": 0,
-			"nextPayDay": 0,
-			"countDown": 0
-		};
+		var result = {};
 
 		var ctx = document.getElementById('chart-area').getContext('2d'); // 차트 객체
 
 		var setStorage = function(){
 			localStorage.setItem('payday', JSON.stringify(payDay));
-			console.info(payDay);
+			// console.info(payDay);
 		};
 
 		var getStorage = function(){
 			var obj = JSON.parse(localStorage.getItem('payday'));
 			if (obj !== null) {
 				payDay = obj;
-				console.log('loaded', payDay);
+				// console.log('loaded', payDay);
 			}
 		};
 
@@ -92,8 +81,7 @@ $(function() {
 			}
 		};
 
-		var onLoad = function(){
-			getStorage();
+		var fillSettingsForm = function(){
 			for (var prop in payDay) {
 				if (payDay.hasOwnProperty(prop)) {
 					$settings.find('.' + prop).val(payDay[prop]);
@@ -103,10 +91,10 @@ $(function() {
 
 		function returnNumberFormat(_val){
 			if (_val !== '') {
-				var _result = parseInt(_val.replace(/\D/g,''),10);
-				return _result;
+				_val = parseInt(_val.replace(/\D/g,''),10);
+				_val = _val.toLocaleString('en');
 			}
-			return
+			return _val;
 		}
 
 		var onChange = function(e){
@@ -125,7 +113,55 @@ $(function() {
 			setStorage();
 		};
 
+		var getResult = function(){
+			// console.info(result);
+			result.leftWorkdayPercent = 20;
+
+			// console.log(payDay);
+
+			var now = new moment();
+
+			var arrNow = {
+				isNextMonth: false,
+				nowFormat: now.format(),
+				nowYear: now.year(),
+				nowMonth: now.month(),
+				nowDay: now.day()
+			};
+
+			var _leftDay = payDay.payDay - arrNow.nowDay;
+			arrNow.isNextMonth = (_leftDay < 0) ? true : false; // 수령일이 지났을 경우
+
+			console.table(arrNow);
+
+			var next = new moment();
+			next.add(1, 'month');
+
+			var arrNext = {
+				nextFormat: next.format(),
+				nextYear: next.year(),
+				nextMonth: next.month(),
+				nextDay: next.day()
+			};
+
+			console.table(arrNext);
+
+			result = {
+				earnedToday: 0, // 지난 달, 오늘, 일할 금액 계산 필요
+				leftWorkday: 0, //
+				leftWorkdayPercent: 0,
+				nextPayDay: 0,
+				countDown: 0
+			};
+
+			console.table(result);
+
+		};
+
 		var setChart = function(){
+
+			optionChart.data.datasets[0].data = [ result.leftWorkdayPercent, 100 - result.leftWorkdayPercent ];
+
 			window.myChart = new Chart(ctx, optionChart);
 		};
 
@@ -140,9 +176,12 @@ $(function() {
 			$settings = $('#settings');
 			$settingsForm = $settings.find('input');
 
+			getStorage();
+			fillSettingsForm();
+			getResult();
 			setChart();
 			setHandler();
-			onLoad();
+
 		};
 
 		init();

@@ -4,6 +4,7 @@ canvas {
     -ms-user-select: none;
 }
 a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
+
 .uk-countdown-number { font-size: 1.6rem; }
 @media (min-width: 321px) {
     .uk-countdown-number { font-size: 2rem; }
