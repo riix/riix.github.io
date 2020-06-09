@@ -1,0 +1,22 @@
+.uk-tab>*>a {
+    display: block;
+    text-align: center;
+    padding: 9px 20px;
+    color: #999;
+    border-bottom: 2px solid transparent;
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: color .1s ease-in-out;
+    line-height: 20px;
+}
+
+body { overflow-y: scroll; }
+#container { padding: 40px 0 40px; min-width: 320px; }
+.uk-grid-item-match, .uk-grid-match > * { display: block; }
+.action .submit { float: right; }
+a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
+.list-url {}
+.list-image li { padding: 10px 0; text-align: center; }
+.list-image img { margin: 0 auto; width: 100%; max-width: 200px; min-height: 50px; background-color: #ff0000; }
+.error .list-url li a { color: #f0506e; }
+.error .list-image  >li { background-color: #f0506e; }

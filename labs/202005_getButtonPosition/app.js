@@ -106,7 +106,7 @@ $(function(){
                 };
                 var _position = _arr[i].left + '|' + _arr[i].top + '|' + _arr[i].right + '|' + _arr[i].bottom;
                 _html += '<a class="gaip" href="javascript:;" style="' + getStrInlineStyle(_styles) + '"';
-                _html += ' data-' + _arr[i].dataAttr + '="'+ _arr[i].dataAttrVal + '" data-position="' + _position + '">';
+                _html += ' data-position="' + _position + '" data-' + _arr[i].dataAttr + '="'+ _arr[i].dataAttrVal + '">';
                 _html += _arr[i].dataAttrVal + '</a>\n';
             }
             return _html;
