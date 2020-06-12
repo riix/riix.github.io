@@ -79,12 +79,12 @@ $(function() {
             return _result;
         };
 
-        var countItems = function(_el){ // 아이탬 갯수 반환
-            var _val = _el.val().replace(/\n$/gm, ''); // 빈줄 삭제
+        var countTextareaRow = function(_val){ // 아이탬 갯수 반환
+            _val = (_val !== undefined) ? _val : '';
+            _val = _val.replace(/\n$/gm, ''); // 빈줄 삭제
             var _length = _val.split('\n').length;
             if (_val == '') _length = 0;
-            console.log(_length);
-            _el.next().children().text(_length);
+            return _length;
         };
 
         var getHtml = {
@@ -112,14 +112,14 @@ $(function() {
                     _html += '                 <label class="uk-form-label" for="form-stacked-text">PC</label>';
                     _html += '                 <div class="uk-form-controls">';
                     _html += '                     <textarea name="pc" class="pc js-input uk-textarea uk-form-small" rows="8" placeholder="PC Files">' + _pages.pc + '</textarea>';
-                    _html += '                     <strong class="item-count"><span>0</span> items</strong>';
+                    _html += '                     <strong class="item-count"><span>' + countTextareaRow(_pages.pc) + '</span> items</strong>';
                     _html += '                 </div>';
                     _html += '             </div>';
                     _html += '             <div>';
                     _html += '                 <label class="uk-form-label" for="form-stacked-text">Mobile</label>';
                     _html += '                 <div class="uk-form-controls">';
                     _html += '                     <textarea name="mobile" class="mobile js-input uk-textarea uk-form-small" rows="8" placeholder="Mobile Files">' + _pages.mobile + '</textarea>';
-                    _html += '                     <strong class="item-count"><span>0</span> items</strong>';
+                    _html += '                     <strong class="item-count"><span>' + countTextareaRow(_pages.mobile) + '</span> items</strong>';
                     _html += '                 </div>';
                     _html += '             </div>';
                     _html += '        </div>';
@@ -187,8 +187,6 @@ $(function() {
                     _html += '<li>' + getHtml.page(i) + '</li>';
                 }
                 $content.html(_html);
-                countItems($content.find('textarea.pc'));
-                countItems($content.find('textarea.mobile'));
             },
             tabText: function(_idx){
                 var _arr = opts.pages;
@@ -245,7 +243,7 @@ $(function() {
                         build.tabText(tabIdx);
                     }
                     if (_name.match('pc') || _name.match('mobile')) { // 이벤트명일때
-                        countItems($this);
+                        $this.next().children().text(countTextareaRow($this.val()));
                     }
                     storage.set();
                 });
