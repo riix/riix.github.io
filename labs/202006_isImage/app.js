@@ -79,6 +79,14 @@ $(function() {
             return _result;
         };
 
+        var countItems = function(_el){ // 아이탬 갯수 반환
+            var _val = _el.val().replace(/\n$/gm, ''); // 빈줄 삭제
+            var _length = _val.split('\n').length;
+            if (_val == '') _length = 0;
+            console.log(_length);
+            _el.next().children().text(_length);
+        };
+
         var getHtml = {
             tab: function(_idx) {
                 var _this = opts.pages[_idx];
@@ -179,6 +187,8 @@ $(function() {
                     _html += '<li>' + getHtml.page(i) + '</li>';
                 }
                 $content.html(_html);
+                countItems($content.find('textarea.pc'));
+                countItems($content.find('textarea.mobile'));
             },
             tabText: function(_idx){
                 var _arr = opts.pages;
@@ -226,13 +236,6 @@ $(function() {
                     window.open(_href, _name, 'width=' + _width + ', height=' + _height + ', scrollbars=yes, top=10, left=' + _left);
                 };
 
-                var countItems = function(_el){ // 아이탬 갯수 반환
-                    var _val = _el.val().replace(/\n$/gm, ''); // 빈줄 삭제
-                    var _length = _val.split('\n').length;
-                    if (_val == '') _length = 0;
-                    _el.next().children().text(_length);
-                };
-
                 $document.on('keyup focusout', '.js-input', function(e){
                     var $this = $(e.target);
                     $this = ($this.is('.js-input')) ? $this : $this.closest('.js-input');
@@ -246,6 +249,7 @@ $(function() {
                     }
                     storage.set();
                 });
+
                 $document.on('click', '.clear', function(e){
                     var _idx = tabIdx;
                     var $current = $content.children().eq(_idx);
