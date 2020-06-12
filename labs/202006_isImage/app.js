@@ -8,49 +8,71 @@ $(function() {
 
         var tabIdx = 0;
 
+        var settings = {
+            targets: [{
+                name: '개발 PC',
+                url: 'http://stg.lghellovision.net/',
+                theme: 'uk-card-primary'
+            },
+            {
+                name: '개발 모바일',
+                url: 'http://mstg.lghellovision.net/',
+                theme: 'uk-card-primary'
+            },
+            {
+                name: '상용 PC',
+                url: 'http://lghellovision.net/',
+                theme: 'uk-card-secondary'
+            },
+            {
+                name: '상용 모바일',
+                url: 'http://m.lghellovision.net/',
+                theme: 'uk-card-secondary'
+            },
+            {
+                name: '상용 PC 163:8098',
+                url: 'http://10.10.41.163:8098/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 PC 163:8099',
+                url: 'http://10.10.41.163:8099/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 PC 164:8098',
+                url: 'http://10.10.41.164:8098/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 PC 164:8099',
+                url: 'http://10.10.41.164:8099/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 모바일 163:8100',
+                url: 'http://10.10.41.163:8100/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 모바일 163:8101',
+                url: 'http://10.10.41.163:8101/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 모바일 164:8100',
+                url: 'http://10.10.41.164:8100/',
+                theme: 'uk-card-default'
+            },
+            {
+                name: '상용 모바일 164:8101',
+                url: 'http://10.10.41.164:8101/',
+                theme: 'uk-card-default'
+            }]
+        };
+
         var defaults = {
             sortIdx: [0, 1, 2, 3, 4, 5, 6, 7], // 정렬 인덱스
-            targets: [{
-                    name: '개발 PC',
-                    url: 'http://stg.lghellovision.net/',
-                    theme: 'uk-card-primary'
-                },
-                {
-                    name: '개발 모바일',
-                    url: 'http://mstg.lghellovision.net/',
-                    theme: 'uk-card-primary'
-                },
-                {
-                    name: '상용 PC',
-                    url: 'http://lghellovision.net/',
-                    theme: 'uk-card-secondary'
-                },
-                {
-                    name: '상용 모바일',
-                    url: 'http://m.lghellovision.net/',
-                    theme: 'uk-card-secondary'
-                },
-                {
-                    name: '상용 PC 163:8098',
-                    url: 'http://10.10.41.163:8098/',
-                    theme: 'uk-card-default'
-                },
-                {
-                    name: '상용 PC 163:899',
-                    url: 'http://10.10.41.163:8099/',
-                    theme: 'uk-card-default'
-                },
-                {
-                    name: '상용 PC 164:898',
-                    url: 'http://10.10.41.164:8098/',
-                    theme: 'uk-card-default'
-                },
-                {
-                    name: '상용 PC 164:899',
-                    url: 'http://10.10.41.164:8099/',
-                    theme: 'uk-card-default'
-                }
-            ],
             pages: [{
                 name: '이벤트 1',
                 pc: '',
@@ -97,7 +119,7 @@ $(function() {
             },
             page: function(_idx){
                 var _pages = opts.pages[_idx];
-                var _targets = opts.targets;
+                var _targets = settings.targets;
                 var _html = '';
                     _html += '<div class="uk-card uk-card-default uk-card-body uk-margin">';
                     _html += '    <div class="uk-form-stacked">';
