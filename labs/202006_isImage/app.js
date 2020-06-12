@@ -69,6 +69,16 @@ $(function() {
         var timerActiveTab = null,
             timerShown = null;
 
+        var getEngNum = function(_val) { //  영문자 숫자만 반환
+            var _regex = /[^a-zA-Z0-9]/g;
+            var _result = _val.split('//')[1];
+            _result = _result.split('.');
+            var last = _result.pop(), //  확장자 제거
+                prev = _result.join();
+            _result = prev.replace(_regex, "");
+            return _result;
+        };
+
         var getHtml = {
             tab: function(_idx) {
                 var _this = opts.pages[_idx];
@@ -200,6 +210,19 @@ $(function() {
 
         var handler = {
             set: function(){
+
+                var onOpen = function(e){
+                    e.preventDefault();
+                    var $this = $(e.target);
+                    var _type = $this.closest('module').data('type');
+                    var _href = $this.attr('href'),
+                        _width = (_type == 'mobile') ? 720 : 1160,
+                        _left = screen.width / 2 - (_width / 2),
+                        _height = screen.height - 180;
+                    var _name = getEngNum(_href);
+                    window.open(_href, _name, 'width=' + _width + ', height=' + _height + ', scrollbars=yes, top=10, left=' + _left);
+                };
+
                 $document.on('keyup focusout', '.js-input', function(e){
                     var $this = $(e.target);
                     $this = ($this.is('.js-input')) ? $this : $this.closest('.js-input');
@@ -259,7 +282,7 @@ $(function() {
                         activeTab(_idx);
                     }
                 });
-
+                $document.on('click', 'a[target="_blank"]', onOpen);
 
                 $document.on('click', '.js-submit', function(e){
                     var $this = $(e.target);

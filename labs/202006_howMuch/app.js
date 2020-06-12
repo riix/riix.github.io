@@ -47,11 +47,11 @@ $(function() {
 			$settings = null,
 			$settingsForm = null;
 
-		var payDay = {
-			"startTime": 0,
-			"endTime": 0,
-			"payDay": 0,
-			"totalMoney": 0
+		var objPay = {
+			date: '13',
+			startTime: '09:00',
+			endTime: '18:00',
+			totalMoney: '3,000,000'
 		};
 
 		var result = {};
@@ -59,42 +59,47 @@ $(function() {
 		var ctx = document.getElementById('chart-area').getContext('2d'); // 차트 객체
 
 		var setStorage = function(){
-			localStorage.setItem('payday', JSON.stringify(payDay));
-			// console.info(payDay);
+			localStorage.setItem('howMuch', JSON.stringify(objPay));
+			// console.info(objPay);
 		};
 
 		var getStorage = function(){
-			var obj = JSON.parse(localStorage.getItem('payday'));
-			if (obj !== null) {
-				payDay = obj;
-				// console.log('loaded', payDay);
-			}
+			// var obj = JSON.parse(localStorage.getItem('howMuch'));
+			// if (obj !== null) {
+			// 	objPay = obj;
+			// }
 		};
 
 		var setProp = function(_id, _val){
-			for (var prop in payDay) {
-				if (payDay.hasOwnProperty(prop)) {
+			for (var prop in objPay) {
+				if (objPay.hasOwnProperty(prop)) {
 					if (prop == _id) {
-						payDay[prop] = _val;
+						objPay[prop] = _val;
 					}
 				}
 			}
 		};
 
 		var fillSettingsForm = function(){
-			for (var prop in payDay) {
-				if (payDay.hasOwnProperty(prop)) {
-					$settings.find('.' + prop).val(payDay[prop]);
+			for (var prop in objPay) {
+				if (objPay.hasOwnProperty(prop)) {
+					$settings.find('.' + prop).val(objPay[prop]);
 				}
 			}
 		};
 
-		function returnNumberFormat(_val){
+		function returnNumberFormat(_val){ // 숫자 쉼표 처리
 			if (_val !== '') {
+				console.log(_val);
 				_val = parseInt(_val.replace(/\D/g,''),10);
 				_val = _val.toLocaleString('en');
 			}
 			return _val;
+		}
+
+		function toDigit(_num){ // 두자리 숫자 반환
+			_num = (_num >= 10) ? _num : '0' + _num;
+			return _num;
 		}
 
 		var onChange = function(e){
@@ -114,74 +119,86 @@ $(function() {
 		};
 
 		var getResult = function(){
-			// console.info(result);
-			result.leftWorkdayPercent = 20;
 
-			// console.log(payDay);
+			console.table(objPay);
 
-			var now = new moment();
-
-			var arrNow = {
-				isNextMonth: false,
-				nowFormat: now.format(),
-				nowYear: now.year(),
-				nowMonth: now.month(),
-				nowDay: now.day()
+			var getDiffTime = function(_startDate, _endDate, _boolDay){
+				var _result = (new Date(_startDate)) - (new Date(_endDate));
+				_result = (_boolDay === true) ? (_result / (1000 * 60 * 60 * 24)) : _result; // _boolday 가 참일 경우 날짜 반환
+				return _result;
 			};
 
-			var _leftDay = payDay.payDay - arrNow.nowDay;
-			arrNow.isNextMonth = (_leftDay < 0) ? true : false; // 수령일이 지났을 경우
+			var today = new Date();
 
-			console.table(arrNow);
-
-			var next = new moment();
-			next.add(1, 'month');
-
-			var arrNext = {
-				nextFormat: next.format(),
-				nextYear: next.year(),
-				nextMonth: next.month(),
-				nextDay: next.day()
+			var a = {
+				full: today.toString(),
+				year: today.getFullYear(),
+				month: today.getMonth() + 1,
+				date: today.getDate(),
+				day: today.getDay(),
+				time: today.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			};
 
-			console.table(arrNext);
+			// a.date = 12; // 테스트
+			console.table(a);
+
+			var theday = new Date(a.year + '-' + a.month + '-' + objPay.date);
+			if (objPay.date - a.date < 0) { // 이번달 date가 지나 다음달이 대상이어여할 경우
+				theday.setMonth(theday.getMonth() + 1); // 한달 뒤로 교정
+			}
+			var b = {
+				full: theday.toString(),
+				year: theday.getFullYear(),
+				month: theday.getMonth() + 1,
+				date: theday.getDate(),
+				day: theday.getDay(),
+				time: theday.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
+			};
+
+			var _leftWorkday = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, true);
+			var c = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, false);
+
+			var _earnedToday = parseInt(objPay.totalMoney.replace(/,/g,""));
+			_earnedToday = Math.floor(_earnedToday / 30);
 
 			result = {
-				earnedToday: 0, // 지난 달, 오늘, 일할 금액 계산 필요
-				leftWorkday: 0, //
-				leftWorkdayPercent: 0,
-				nextPayDay: 0,
-				countDown: 0
+				earnedToday: _earnedToday, // 지난 달, 오늘, 일할 금액 계산 필요
+				earnedTodayAfterTax: Math.floor(_earnedToday * 0.967),
+				leftWorkday: 0 - _leftWorkday, // 남은 날짜
+				completePercent: ((1 + (_leftWorkday / 30)) * 100).toFixed(2) * 1,
+				nextPayDay: b.month + '/' + b.date,
+				countDown: 'date: '+ b.year +'-'+ toDigit(b.month) +'-'+ toDigit(b.date) +'T00:00:00+09:00'
 			};
-
 			console.table(result);
 
 		};
 
 		var setChart = function(){
-
-			optionChart.data.datasets[0].data = [ result.leftWorkdayPercent, 100 - result.leftWorkdayPercent ];
-
+			optionChart.data.datasets[0].data = [ result.completePercent, 100 - result.completePercent ];
 			window.myChart = new Chart(ctx, optionChart);
 		};
 
 		var setHandler = function(){
-			$app.on('keyup change', 'input', function(e){
-				onChange(e);
-			});
+			$app.on('keyup change', 'input', onChange);
+		};
+
+		var run = function(){
+			$('.countdown').attr('uk-countdown', result.countDown);
+			$('.earnedToday').text('KRW ' + result.earnedToday.toLocaleString('en'));
+			$('.earnedTodayAfterTax').text('KRW ' + result.earnedTodayAfterTax.toLocaleString('en'));
+			$('.leftWorkday').text(result.leftWorkday + ' day');
+			$('.nextPayDay').text(result.nextPayDay);
 		};
 
 		var init = function(){
-
 			$settings = $('#settings');
 			$settingsForm = $settings.find('input');
-
 			getStorage();
 			fillSettingsForm();
 			getResult();
+			run();
 			setChart();
 			setHandler();
-
 		};
 
 		init();

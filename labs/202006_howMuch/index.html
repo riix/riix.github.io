@@ -32,10 +32,35 @@
                         <div class="module">
                             <div class="uk-grid-small" uk-grid>
                                 <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>Earned Realtime</span>
+                                </div>
+                                <div>
+                                    <span class="earnedToday uk-badge">$ 0</span>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
                                     <span>Earned today</span>
                                 </div>
                                 <div>
-                                    <span class="uk-badge">$ 20.90</span>
+                                    <span class="earnedToday uk-badge">$ 0</span>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>After tax</span>
+                                </div>
+                                <div>
+                                    <span class="earnedTodayAfterTax uk-badge">$ 0</span>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>You worked</span>
+                                    <span class="uk-visible@m">until the next payday</span>
+                                </div>
+                                <div>
+                                    <span class="leftWorkday uk-badge">0 Days</span>
                                 </div>
                             </div>
                             <div class="uk-grid-small" uk-grid>
@@ -44,7 +69,15 @@
                                     <span class="uk-visible@m">until the next payday</span>
                                 </div>
                                 <div>
-                                    <span class="uk-badge">100 Day</span>
+                                    <span class="leftWorkday uk-badge">0 Days</span>
+                                </div>
+                            </div>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-expand" uk-leader="fill: -">
+                                    <span>Next pay day</span>
+                                </div>
+                                <div>
+                                    <span class="nextPayDay uk-badge">09/09</span>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +88,7 @@
 
                 <div class="uk-flex uk-flex-center">
                     <div>
-                        <div class="uk-grid-small uk-child-width-auto" uk-grid uk-countdown="date: 2020-06-12T00:00:00+09:00">
+                        <div class="countdown uk-grid-small uk-child-width-auto" uk-grid>
                             <div>
                                 <div class="uk-countdown-number uk-countdown-days"></div>
                                 <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Days</div>
@@ -109,7 +142,7 @@
                                     <div class="uk-width-1-4@s">
                                         <label class="uk-form-label">Payday (n day of each month)</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input payDay" id="payDay" type="text" placeholder="01" maxlength="2" />
+                                            <input class="uk-input payDate" id="payDate" type="text" placeholder="01" maxlength="2" />
                                         </div>
                                     </div>
                                     <div class="uk-width-1-4@s">

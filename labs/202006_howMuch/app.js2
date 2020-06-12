@@ -1,0 +1,197 @@
+'use strict';
+
+(function(global) {
+	var Base = global.Base || (global.Base = {});
+}(this));
+
+$(function() {
+
+	var optionChart = {
+		type: 'doughnut',
+		data: {
+			datasets: [{
+				data: [
+					0,
+					0
+				],
+				backgroundColor: [
+					'#1e87f0',
+					'#f8f8f8'
+				]
+			}],
+			labels: [
+				'0',
+				'0'
+			]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				position: 'bottom',
+			},
+			title: {
+				display: true,
+				text: 'Today'
+			},
+			animation: {
+				animateScale: true,
+				animateRotate: true
+			}
+		}
+	};
+
+    var appHowMuch = function() {
+
+		var $document = $(document),
+			$app = $('#app'),
+			$settings = null,
+			$settingsForm = null;
+
+		var payDate = {
+			startTime: '09:00',
+			endTime: '18:00',
+			payDate: '12',
+			totalMoney: '46,000,000'
+		};
+
+		var result = {};
+
+		var ctx = document.getElementById('chart-area').getContext('2d'); // 차트 객체
+
+		var setStorage = function(){
+			localStorage.setItem('howMuch', JSON.stringify(payDate));
+			// console.info(payDate);
+		};
+
+		var getStorage = function(){
+			// var obj = JSON.parse(localStorage.getItem('howMuch'));
+			// if (obj !== null) {
+			// 	payDate = obj;
+			// }
+		};
+
+		var setProp = function(_id, _val){
+			for (var prop in payDate) {
+				if (payDate.hasOwnProperty(prop)) {
+					if (prop == _id) {
+						payDate[prop] = _val;
+					}
+				}
+			}
+		};
+
+		var fillSettingsForm = function(){
+			for (var prop in payDate) {
+				if (payDate.hasOwnProperty(prop)) {
+					$settings.find('.' + prop).val(payDate[prop]);
+				}
+			}
+		};
+
+		function returnNumberFormat(_val){
+			if (_val !== '') {
+				_val = parseInt(_val.replace(/\D/g,''),10);
+				_val = _val.toLocaleString('en');
+			}
+			return _val;
+		}
+
+		var onChange = function(e){
+			var $this = $(e.target);
+			$this = ($this.is('input')) ? $this : $this.closest('input');
+			var _type = $this.data('type');
+			var _format = $this.data('format');
+			var _val = $this.val() || '';
+			_val = (_type == 'number') ? _val * 1 : _val;
+
+			if (_format == 'money' && _val !== '') {
+				$this.val(returnNumberFormat(_val));
+			}
+
+			setProp($this.attr('id'), _val);
+			setStorage();
+		};
+
+		var getResult = function(){
+
+			//////////////////////////////////////////////// 이번달
+			var now = new moment();
+			var a = {
+				isThisMonth: false,
+				nowFormat: now.format(),
+				nowYear: now.year(),
+				nowMonth: now.month() + 1,
+				nowDate: now.date(),
+				lastDate: moment().endOf('month').date() // 마지막 달
+			};
+			// a.nowDate = 1;
+			a.isThisMonth = (payDate.payDate - a.nowDate >= 0) ? true : false; // 급여일 지났는지
+			console.table(a);
+
+			//////////////////////////////////////////////// 다음달
+			var next = now.clone();
+
+			if (a.isThisMonth !== true) { // 다음달일 경우 1달 추가 계산
+				next.add(1, 'month');
+			}
+			console.log(next.format(), next.month());
+			next.date(payDate.payDate * 1); // 정산일 조정
+
+			var b = {
+				nextFormat: next.format(),
+				nextYear: next.year(),
+				nextMonth: next.month() + 1,
+				nextDate: next.date(),
+				lastDate: next.endOf('month').date() // 마지막 달
+			};
+			console.table(b); // 다음번
+
+			//////////////////////////////////////////////// 결과
+			var _totalMoney = parseInt(payDate.totalMoney.replace(/,/g,""));
+			var _earnedToday = Math.floor(_totalMoney / b.lastDate); // 오늘 번돈
+
+			result = {
+				earnedToday: _earnedToday, // 지난 달, 오늘, 일할 금액 계산 필요
+				leftWorkday: 0, //
+				leftWorkdayPercent: 0,
+				nextPayDay: 0,
+				countDown: 0
+			};
+
+			console.table(result);
+
+		};
+
+		var setChart = function(){
+
+			optionChart.data.datasets[0].data = [ result.leftWorkdayPercent, 100 - result.leftWorkdayPercent ];
+
+			window.myChart = new Chart(ctx, optionChart);
+		};
+
+		var setHandler = function(){
+			$app.on('keyup change', 'input', function(e){
+				onChange(e);
+			});
+		};
+
+		var init = function(){
+
+			$settings = $('#settings');
+			$settingsForm = $settings.find('input');
+
+			getStorage();
+			fillSettingsForm();
+			getResult();
+			setChart();
+			setHandler();
+
+		};
+
+		init();
+
+    };
+
+    appHowMuch();
+
+});
