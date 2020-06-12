@@ -104,12 +104,14 @@ $(function() {
                     _html += '                 <label class="uk-form-label" for="form-stacked-text">PC</label>';
                     _html += '                 <div class="uk-form-controls">';
                     _html += '                     <textarea name="pc" class="pc js-input uk-textarea uk-form-small" rows="8" placeholder="PC Files">' + _pages.pc + '</textarea>';
+                    _html += '                     <strong class="item-count"><span>0</span> items</strong>';
                     _html += '                 </div>';
                     _html += '             </div>';
                     _html += '             <div>';
                     _html += '                 <label class="uk-form-label" for="form-stacked-text">Mobile</label>';
                     _html += '                 <div class="uk-form-controls">';
                     _html += '                     <textarea name="mobile" class="mobile js-input uk-textarea uk-form-small" rows="8" placeholder="Mobile Files">' + _pages.mobile + '</textarea>';
+                    _html += '                     <strong class="item-count"><span>0</span> items</strong>';
                     _html += '                 </div>';
                     _html += '             </div>';
                     _html += '        </div>';
@@ -214,13 +216,21 @@ $(function() {
                 var onOpen = function(e){
                     e.preventDefault();
                     var $this = $(e.target);
-                    var _type = $this.closest('module').data('type');
+                    $this = ($this.is('a')) ? $this : $this.closest('a');
+                    var _type = $this.closest('.module').data('type');
                     var _href = $this.attr('href'),
                         _width = (_type == 'mobile') ? 720 : 1160,
                         _left = screen.width / 2 - (_width / 2),
                         _height = screen.height - 180;
                     var _name = getEngNum(_href);
                     window.open(_href, _name, 'width=' + _width + ', height=' + _height + ', scrollbars=yes, top=10, left=' + _left);
+                };
+
+                var countItems = function(_el){ // 아이탬 갯수 반환
+                    var _val = _el.val().replace(/\n$/gm, ''); // 빈줄 삭제
+                    var _length = _val.split('\n').length;
+                    if (_val == '') _length = 0;
+                    _el.next().children().text(_length);
                 };
 
                 $document.on('keyup focusout', '.js-input', function(e){
@@ -230,6 +240,9 @@ $(function() {
                     opts.pages[tabIdx][_name] = $this.val();
                     if (_name.match('name')) { // 이벤트명일때
                         build.tabText(tabIdx);
+                    }
+                    if (_name.match('pc') || _name.match('mobile')) { // 이벤트명일때
+                        countItems($this);
                     }
                     storage.set();
                 });
