@@ -32,22 +32,22 @@ $(function() {
                 },
                 {
                     name: '상용 PC 163:8098',
-                    url: 'http://10.10.41.163:898/',
+                    url: 'http://10.10.41.163:8098/',
                     theme: 'uk-card-default'
                 },
                 {
                     name: '상용 PC 163:899',
-                    url: 'http://10.10.41.163:899/',
+                    url: 'http://10.10.41.163:8099/',
                     theme: 'uk-card-default'
                 },
                 {
                     name: '상용 PC 164:898',
-                    url: 'http://10.10.41.164:898/',
+                    url: 'http://10.10.41.164:8098/',
                     theme: 'uk-card-default'
                 },
                 {
                     name: '상용 PC 164:899',
-                    url: 'http://10.10.41.164:899/',
+                    url: 'http://10.10.41.164:8099/',
                     theme: 'uk-card-default'
                 }
             ],

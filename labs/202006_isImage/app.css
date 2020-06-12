@@ -10,17 +10,17 @@
     line-height: 20px;
     user-select: none;
 }
-
-body { overflow-y: scroll; }
-#container { padding: 40px 0 40px; min-width: 320px; }
 .uk-grid-item-match, .uk-grid-match > * { display: block; }
 .uk-tab>*>a { padding-right: 30px; }
 .uk-tab li { position: relative; }
 .uk-tab [uk-icon] { position: absolute; top: 50%; right: 0; transform: translate(0, -50%); cursor: pointer; }
+.uk-form-small { font-size: .78em; }
+
+body { overflow-y: scroll; }
+#container { padding: 40px 0 40px; min-width: 320px; }
 .js-add { display: inline-block; position: absolute; right: 0; top: 0; padding: 5px; }
 .item-count { display: block; margin-top: 5px; text-align: right; font-weight: normal; }
 .item-count span { font-weight: bold; }
-
 .action .submit { float: right; }
 a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
 .list-url {}
