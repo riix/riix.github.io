@@ -31,7 +31,7 @@ $(function() {
 			},
 			title: {
 				display: true,
-				text: 'Today'
+				text: 'Monthly Process Score'
 			},
 			animation: {
 				animateScale: true,
@@ -48,10 +48,10 @@ $(function() {
 			$settingsForm = null;
 
 		var objPay = {
-			date: '13',
+			date: '12',
 			startTime: '09:00',
 			endTime: '18:00',
-			totalMoney: '3,000,000'
+			totalMoney: '1,000,000'
 		};
 
 		var result = {};
@@ -95,7 +95,13 @@ $(function() {
 				_val = _val.toLocaleString('en');
 			}
 			return _val;
-		}
+		};
+
+		function removeComma(str){ // 쉼표 제거
+			console.log(str);
+			var n = parseInt(str.replace(/,/g,""));
+			return n * 1;
+		};
 
 		function toDigit(_num){ // 두자리 숫자 반환
 			_num = (_num >= 10) ? _num : '0' + _num;
@@ -120,7 +126,7 @@ $(function() {
 
 		var getResult = function(){
 
-			console.table(objPay);
+			console.table('config', objPay);
 
 			var getDiffTime = function(_startDate, _endDate, _boolDay){
 				var _result = (new Date(_startDate)) - (new Date(_endDate));
@@ -139,11 +145,11 @@ $(function() {
 				time: today.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			};
 
-			// a.date = 12; // 테스트
 			console.table(a);
 
 			var theday = new Date(a.year + '-' + a.month + '-' + objPay.date);
-			if (objPay.date - a.date < 0) { // 이번달 date가 지나 다음달이 대상이어여할 경우
+			var isNextMonth = (objPay.date - a.date < 0) ? true : false; // 이번달 date가 지나 다음달이 대상이어여할 경우
+			if (isNextMonth === true) {
 				theday.setMonth(theday.getMonth() + 1); // 한달 뒤로 교정
 			}
 			var b = {
@@ -154,27 +160,42 @@ $(function() {
 				day: theday.getDay(),
 				time: theday.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			};
+			console.table(b);
 
-			var _leftWorkday = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, true);
-			var c = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, false);
+			var _leftWorkday = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, true); // 남은 날짜
+			var _leftWorkdayTime = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, false); // 남은 날짜를 str
+
+			var getMonthEnd = function(_time){ // 달마지막 날 구하기
+				var lastday = new Date(_time.getTime());
+				lastday.setMonth(lastday.getMonth()-1);
+				var _end = getDiffTime(b.year + '-' + b.month + '-' + b.date, lastday.getFullYear() + '-' + (lastday.getMonth() + 1) + '-' + lastday.getDate(), true);
+				return _end;
+			};
+
+			var _end = getMonthEnd(theday);
 
 			var _earnedToday = parseInt(objPay.totalMoney.replace(/,/g,""));
-			_earnedToday = Math.floor(_earnedToday / 30);
+			_earnedToday = Math.floor(_earnedToday / _end);
 
 			result = {
 				earnedToday: _earnedToday, // 지난 달, 오늘, 일할 금액 계산 필요
 				earnedTodayAfterTax: Math.floor(_earnedToday * 0.967),
-				leftWorkday: 0 - _leftWorkday, // 남은 날짜
-				completePercent: ((1 + (_leftWorkday / 30)) * 100).toFixed(2) * 1,
+				lastWorkday: _end + _leftWorkday, // 지난 날짜, 보강필요
+				leftWorkday: 0 - _leftWorkday, // 남은 날짜, 보강필요
+				completePercent: ((1 + (_leftWorkday / _end)) * 100).toFixed(2) * 1, // 보강필요
 				nextPayDay: b.month + '/' + b.date,
-				countDown: 'date: '+ b.year +'-'+ toDigit(b.month) +'-'+ toDigit(b.date) +'T00:00:00+09:00'
+				countDown: 'date: '+ b.year +'-'+ toDigit(b.month) +'-'+ toDigit(b.date) +'T00:00:00+09:00',
+				monthEnd: _end // 막날
 			};
-			console.table(result);
+			console.table('result', result);
 
 		};
 
 		var setChart = function(){
-			optionChart.data.datasets[0].data = [ result.completePercent, 100 - result.completePercent ];
+			var _lastday = result.completePercent;
+			var _leftday = 100 - result.completePercent;
+			optionChart.data.datasets[0].data = [ _lastday, _leftday ];
+			optionChart.data.labels = [ 'last ' + Math.round(_lastday) + '%', 'left ' + Math.round(_leftday) + '%']
 			window.myChart = new Chart(ctx, optionChart);
 		};
 
@@ -186,6 +207,7 @@ $(function() {
 			$('.countdown').attr('uk-countdown', result.countDown);
 			$('.earnedToday').text('KRW ' + result.earnedToday.toLocaleString('en'));
 			$('.earnedTodayAfterTax').text('KRW ' + result.earnedTodayAfterTax.toLocaleString('en'));
+			$('.lastWorkday').text(result.lastWorkday + ' day');
 			$('.leftWorkday').text(result.leftWorkday + ' day');
 			$('.nextPayDay').text(result.nextPayDay);
 		};
