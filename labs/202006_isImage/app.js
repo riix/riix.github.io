@@ -189,7 +189,7 @@ $(function() {
             }
         };
 
-
+        var _regImage = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
 
         var build = {
             tab: function(){
@@ -338,7 +338,11 @@ $(function() {
                     var checkLinks = function($el, _arr){
                         var _html = '<ul class="uk-list uk-list-collapse uk-list-striped list-image">'
                         for (var i = 0; i < _arr.length; i++) {
-                            _html += '<li><a href="' + _arr[i] + '?ts=' + timestamp + '" target="_blank"><img src="' + _arr[i] + '" alt="' + _arr[i] + '"/></a></li>';
+                            if (_arr[i].match(_regImage)) { // 이미지 파일일 경우
+                                _html += '<li><a href="' + _arr[i] + '?ts=' + timestamp + '" target="_blank"><img src="' + _arr[i] + '" alt="' + _arr[i] + '"/></a></li>';
+                            } else {
+                                _html += '<li class="file-default"><a href="' + _arr[i] + '?ts=' + timestamp + '" target="_blank">' + _arr[i] + '</a></li>';
+                            }
                         }
                         _html += '</ul>';
                         $el.html(_html);
@@ -373,7 +377,9 @@ $(function() {
                     var getListHtml = function(_arr){ // 파일 목록 html 구하기
                         var _result = '<ul class="uk-list uk-list-collapse uk-list-striped list-url">'
                         for (var i = 0; i < _arr.length; i++) {
-                            _result += '<li><a href="' + _arr[i] + '?ts=' + timestamp + '" target="_blank">' + _arr[i] + '</a></li>';
+                            var _className = (_arr[i].match(_regImage)) ? 'file-image' : 'file-default';
+                            _result += '<li class="' + _className + '"><a href="' + _arr[i] + '?ts=' + timestamp + '" target="_blank">' + _arr[i] + '</a></li>';
+
                         }
                         _result += '</ul>';
                         return _result;
