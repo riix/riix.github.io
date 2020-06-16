@@ -6,11 +6,14 @@ canvas {
 a[uk-totop] { position: fixed; right: 0; bottom: 0; padding: 40px; }
 
 .uk-countdown-number { font-size: 1.6rem; }
+.uk-countdown-label { font-size: 0.6rem; }
 @media (min-width: 321px) {
     .uk-countdown-number { font-size: 2rem; }
+    .uk-countdown-label { font-size: 0.8rem; }
 }
 @media (min-width: 640px) {
     .uk-countdown-number { font-size: 2rem; }
+    .uk-countdown-label { font-size: 1rem; }
 }
 @media (min-width: 960px) {
     .uk-countdown-number { font-size: 3rem; }
