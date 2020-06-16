@@ -214,7 +214,7 @@ $(function() {
 			getStorage();
 			fillSettingsForm();
 			getResult();
-			// run();
+			run();
 			// setChart();
 			// setHandler();
 		};
