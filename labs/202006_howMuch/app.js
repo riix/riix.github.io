@@ -126,7 +126,7 @@ $(function() {
 
 		var getResult = function(){
 
-			console.table('config', objPay);
+			// console.table('config', objPay);
 
 			var getDiffTime = function(_startDate, _endDate, _boolDay){
 				var _result = (new Date(_startDate)) - (new Date(_endDate));
@@ -145,7 +145,7 @@ $(function() {
 				time: today.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			};
 
-			console.table(a);
+			// console.table(a);
 
 			var theday = new Date(a.year + '-' + a.month + '-' + objPay.date);
 			var isNextMonth = (objPay.date - a.date < 0) ? true : false; // 이번달 date가 지나 다음달이 대상이어여할 경우
@@ -160,7 +160,7 @@ $(function() {
 				day: theday.getDay(),
 				time: theday.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			};
-			console.table(b);
+			// console.table(b);
 
 			var _leftWorkday = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, true); // 남은 날짜
 			var _leftWorkdayTime = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, false); // 남은 날짜를 str
@@ -187,7 +187,7 @@ $(function() {
 				countDown: 'date: '+ b.year +'-'+ toDigit(b.month) +'-'+ toDigit(b.date) +'T00:00:00+09:00',
 				monthEnd: _end // 막날
 			};
-			console.table('result', result);
+			// console.table('result', result);
 
 		};
 
