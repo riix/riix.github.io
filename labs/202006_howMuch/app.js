@@ -6,6 +6,8 @@ $(function() {
 
 	'use strict';
 
+	alert('123123');
+
 	var optionChart = {
 		type: 'doughnut',
 		data: {
@@ -90,7 +92,6 @@ $(function() {
 
 		function returnNumberFormat(_val){ // 숫자 쉼표 처리
 			if (_val !== '') {
-				console.log(_val);
 				_val = parseInt(_val.replace(/\D/g,''),10);
 				_val = _val.toLocaleString('en');
 			}
@@ -98,7 +99,6 @@ $(function() {
 		};
 
 		function removeComma(str){ // 쉼표 제거
-			console.log(str);
 			var n = parseInt(str.replace(/,/g,""));
 			return n * 1;
 		};
