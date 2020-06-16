@@ -104,7 +104,7 @@ $(function() {
 		function toDigit(_num){ // 두자리 숫자 반환
 			_num = (_num >= 10) ? _num : '0' + _num;
 			return _num;
-		}
+		};
 
 		var onChange = function(e){
 			var $this = $(e.target);
@@ -113,11 +113,9 @@ $(function() {
 			var _format = $this.data('format');
 			var _val = $this.val() || '';
 			_val = (_type == 'number') ? _val * 1 : _val;
-
 			if (_format == 'money' && _val !== '') {
 				$this.val(returnNumberFormat(_val));
 			}
-
 			setProp($this.attr('id'), _val);
 			setStorage();
 		};
@@ -216,9 +214,9 @@ $(function() {
 			getStorage();
 			fillSettingsForm();
 			getResult();
-			run();
-			setChart();
-			setHandler();
+			// run();
+			// setChart();
+			// setHandler();
 		};
 
 		init();
