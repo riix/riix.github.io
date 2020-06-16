@@ -1,10 +1,10 @@
-'use strict';
-
 (function(global) {
 	var Base = global.Base || (global.Base = {});
 }(this));
 
 $(function() {
+
+	'use strict';
 
 	var optionChart = {
 		type: 'doughnut',
