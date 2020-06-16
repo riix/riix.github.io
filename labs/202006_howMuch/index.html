@@ -159,8 +159,9 @@
         <a href="#" uk-totop uk-scroll></a>
     </div>
 </div>
-<script src="app.js?cb=2"></script>
 <script>
+var timestamp = Math.floor(+ new Date() / 1000);
+document.write('<script src="app.js?=' + timestamp + '"><\/script>');
 </script>
 </body>
 </html>

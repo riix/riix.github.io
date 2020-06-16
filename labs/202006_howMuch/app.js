@@ -6,8 +6,6 @@ $(function() {
 
 	'use strict';
 
-	alert('123123');
-
 	var optionChart = {
 		type: 'doughnut',
 		data: {
