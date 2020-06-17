@@ -136,13 +136,12 @@ $(function() {
             var a = {
                 full: today.toString(),
                 year: today.getFullYear(),
-                month: toDigit(today.getMonth() + 1),
-                date: toDigit(today.getDate()),
+                month: today.getMonth() + 1,
+                date: today.getDate(),
                 day: today.getDay(),
                 time: today.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
             };
-
-            // console.log(a);
+            console.table(a);
 
             var _theday = a.year + '-' + a.month + '-' + objPay.date;
             var theday = new Date(_theday);
@@ -155,19 +154,19 @@ $(function() {
             var b = {
                 full: theday.toString(),
                 year: theday.getFullYear(),
-                month: toDigit(theday.getMonth() + 1),
-                date: toDigit(theday.getDate()),
+                month: theday.getMonth() + 1,
+                date: theday.getDate(),
                 day: theday.getDay(),
                 time: theday.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
             };
-            // console.log(b);
+            console.table(b);
 
-            var _leftWorkday = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, true); // 남은 날짜
-            var _leftWorkdayTime = getDiffTime(a.year + '-' + a.month + '-' + a.date, b.year + '-' + b.month + '-' + b.date, false); // 남은 날짜를 str
+            var _leftWorkday = getDiffTime(a.year + '-' + toDigit(a.month) + '-' + toDigit(a.date), b.year + '-' + toDigit(b.month) + '-' + toDigit(b.date), true); // 남은 날짜
+            var _leftWorkdayTime = getDiffTime(a.year + '-' + toDigit(a.month) + '-' + toDigit(a.date), b.year + '-' + toDigit(b.month) + '-' + toDigit(b.date), false); // 남은 날짜를 str
             var getMonthEnd = function(_time) { // 달마지막 날 구하기
                 var lastday = new Date(_time.getTime());
                 lastday.setMonth(lastday.getMonth() - 1);
-                var _end = getDiffTime(b.year + '-' + b.month + '-' + b.date, lastday.getFullYear() + '-' + toDigit(lastday.getMonth() + 1) + '-' + toDigit(lastday.getDate()), true);
+                var _end = getDiffTime(b.year + '-' + b.month + '-' + b.date, lastday.getFullYear() + '-' + (lastday.getMonth() + 1) + '-' + lastday.getDate(), true);
                 return _end;
             };
 
@@ -187,7 +186,7 @@ $(function() {
                 monthEnd: _end // 막날
             };
 
-            console.log('result', objResult);
+            console.table(objResult);
 
         };
 
