@@ -1,0 +1,14 @@
+body {
+    overflow-y: scroll;
+}
+.container {
+    padding: 120px 0;
+    &::after {
+        content: '';
+        display: table;
+        overflow: hidden;
+    }
+    &:nth-child(odd) {
+        background-color: #eee;
+    }
+}
