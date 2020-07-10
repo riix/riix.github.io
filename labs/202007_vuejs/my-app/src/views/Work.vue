@@ -18,7 +18,9 @@
   </div>
 </template>
 <script>
-var api = 'data.json';
+import settings from '@/settings.js' // settings
+
+var api = settings.api || 'data.json';
 
 export default {
     name: 'Work',

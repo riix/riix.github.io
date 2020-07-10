@@ -18,6 +18,9 @@ export default {
         username() {
             return this.$route.params.username
         }
+    },
+    beforeCreate: function(){
+        console.log(this.$myAddedProperty);
     }
 }
 </script>

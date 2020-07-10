@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import settings from '@/settings.js' // settings
+
 export default {
     data: function(){ // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
         return {
@@ -37,13 +39,23 @@ export default {
             var _path = this.$route.path;
             var _currentPage = _path;
             console.log(_path);
+            console.log(settings.hostname);
             return _currentPage;
         }
     },
-    created (){
-        console.log('created app.vue');
+    created (){ // 실행
+        this.init();
     },
-    
+    beforeCreate: function(){
+        console.log(this.$myAddedProperty);
+        console.log(this.myAddedProperty);
+    },
+    methods: { // method 정의
+        init() {
+            console.log('init');
+        }
+    }
+
     // watch: {
     //     $route: {
     //         handler(to, from) {
@@ -56,6 +68,11 @@ export default {
 }
 </script>
 <style lang="less">
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body { overflow-y: scroll; }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
