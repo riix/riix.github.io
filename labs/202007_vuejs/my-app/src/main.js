@@ -9,10 +9,11 @@ import settings from './settings.js' // settings
 
 import UI from './ui';
 
+import firebase from 'firebase'
+firebase.initializeApp(settings.firebase);
+
 Vue.use(VueAxios, axios, router);
-
 Vue.use(settings);
-
 Vue.use(UI);
 
 Vue.config.productionTip = false

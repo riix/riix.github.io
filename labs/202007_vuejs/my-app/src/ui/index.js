@@ -28,7 +28,7 @@ const UI = {
         // Adding component lifecycle hooks or properties.
         Vue.mixin({
             mounted() {
-                console.log('Mounted!');
+                console.log('UI Mounted!');
             }
         });
     }
@@ -37,7 +37,8 @@ const UI = {
 export default UI;
 
 // Automatic installation if Vue has been added to the global scope.
-if (typeof window !== 'undefined' && window.Vue) {
-    console.log('use');
-    window.Vue.use(UI);
-}
+// 소용없음
+// if (typeof window !== 'undefined' && window.Vue) {
+//     console.log('use');
+//     window.Vue.use(UI);
+// }

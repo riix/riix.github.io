@@ -17,6 +17,9 @@
                 <li class="d1" :class="[currentPage.includes('contact') ? activeClass : '']">
                     <router-link to="/contact">Contact</router-link>
                 </li>
+                <li class="d1" :class="[currentPage.includes('signup') ? activeClass : '']">
+                    <router-link to="/signup">SignUp</router-link>
+                </li>
             </ul>
         </div>
         <transition name="fade" mode="out-in">
@@ -44,11 +47,11 @@ export default {
         }
     },
     created (){ // 실행
-        this.init();
+        this.init(); // 현재페이지
     },
     beforeCreate: function(){
-        console.log(this.$myAddedProperty);
-        console.log(this.myAddedProperty);
+        // console.log(this.$myAddedProperty);
+        // console.log(this.myAddedProperty);
     },
     methods: { // method 정의
         init() {
@@ -106,10 +109,34 @@ body { overflow-y: scroll; }
         }
     }
 }
+
+// dislay
 .toggle {
     display: none;
     &.in {
         display: block;
     }
+}
+
+.container {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    &::after {
+        display: table;
+        content: '';
+        clear: both;
+        overflow: hidden;
+    }
+}
+.container.flex {
+    display: flex;
+    place-items: center;
+    align-items: center;
+    min-height: 100%;
+    min-height: 100vh;
+}
+.wrap {
+    margin: 0 auto;
 }
 </style>
