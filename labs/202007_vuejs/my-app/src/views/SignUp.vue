@@ -35,12 +35,12 @@ export default {
             console.log('email:', this.email)
             console.log('password:', this.password)
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-                .then((user) => {
-                    console.log(user)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+            .then((user) => {
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         },
         prev() {
             this.$refs.PageMask.prev();

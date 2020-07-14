@@ -1,9 +1,5 @@
 // https://www.digitalocean.com/community/tutorials/vuejs-creating-custom-plugins
 
-// Installing App-Wide Components & Directives
-import MyComponent from '@/components/MyComponent.vue';
-import MyDirective from '@/directives/MyDirective.js';
-
 const UI = {
     install(Vue, options) {
 

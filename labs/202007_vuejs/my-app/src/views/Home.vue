@@ -35,6 +35,10 @@ export default {
     beforeCreate: function(){
         console.log(this.$myAddedProperty);
     },
+    created(){
+        console.log('created');
+        // this.getName();
+    },
     methods: {
         prev() {
             this.$refs.PageMask.prev();

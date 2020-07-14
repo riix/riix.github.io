@@ -1,16 +1,19 @@
 import Vue from 'vue'
-import App from './App.vue'
+
+// settings
+import settings from './settings.js' // settings
+
+// core logic
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
-
-import settings from './settings.js' // settings
-
-import UI from './ui';
-
 import firebase from 'firebase'
 firebase.initializeApp(settings.firebase);
+
+// app
+import App from './App.vue'
+import UI from './ui';
 
 Vue.use(VueAxios, axios, router);
 Vue.use(settings);

@@ -29,9 +29,12 @@
 </template>
 
 <script>
+import MyPlugin from '@/plugins/myPlugin.js'
+import MyMixin from '@/mixins/myMixin.js'
 import settings from '@/settings.js' // settings
 
 export default {
+    mixins: [MyMixin],
     data: function(){ // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
         return {
             activeClass: 'in'
@@ -46,8 +49,11 @@ export default {
             return _currentPage;
         }
     },
-    created (){ // 실행
+    created(){ // 실행
         this.init(); // 현재페이지
+    },
+    mounted(){
+        // console.log('name is: ' + this.getName());
     },
     beforeCreate: function(){
         // console.log(this.$myAddedProperty);
