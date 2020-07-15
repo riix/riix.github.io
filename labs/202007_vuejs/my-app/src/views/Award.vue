@@ -3,6 +3,9 @@
     <div class="container">
         <div class="wrap">
             <h1>This is an vue.js award page</h1>
+            <p>
+                parameter : {{ param }}
+            </p>
         </div>
         <div class="action">
             <button v-on:click="prev">up</button>
@@ -22,8 +25,13 @@ export default {
     components: {
         PageMask
     },
-    created (){
-        console.log('created');
+    computed: {
+        param: function () {
+            return this.$route.params;
+        }
+    },
+    created() {
+        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
     },
     // watch: {
     //     '$route': 'prev'

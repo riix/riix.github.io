@@ -3,45 +3,65 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import Home from '@/views/Home.vue';
+import About from '@/views/About.vue';
+import Work from '@/views/Work.vue';
+import Award from '@/views/Award.vue';
+import Contact from '@/views/Contact.vue';
+import SignUp from '@/views/SignUp.vue';
+
+function dynamicPropsFn (route) {
+  const now = new Date()
+  console.log(now);
+  return {
+    name: (now.getFullYear() + parseInt(route.params.years)) + '!'
+  }
+}
+
 const routes = [{
         path: '/',
         name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import( /* webpackChunkName: "about" */ '../views/Home.vue')
+        component: Home
     },
     {
-        path: '/about',
+        path: '/about/',
         name: 'About',
-        component: () => import('../views/About.vue')
+        component: About
     },
     {
         path: '/work',
         name: 'Work',
-        component: () => import('../views/Work.vue')
+        component: Work
     },
     {
         path: '/award',
         name: 'Award',
-        component: () => import('../views/Award.vue')
+        component: Award
     },
     {
         path: '/contact',
         name: 'Contact',
-        component: () => import('../views/Contact.vue')
+        component: Contact
     },
     {
         path: '/signup',
         name: 'SignUp',
-        component: () => import('../views/SignUp.vue')
+        component: SignUp
     }
-]
+];
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     base: process.env.BASE_URL,
-    routes
-})
+    routes: routes
+});
+
+// router.beforeEach((to, from, next) => {
+// });
+// router.afterEach((to, from) => {
+//     // console.log(to, from);
+//     // console.log('page', route.params.pageIdx);
+//     console.log(router);
+// });
 
 export default router

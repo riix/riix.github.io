@@ -3,6 +3,9 @@
     <div class="container">
         <div class="wrap">
             <h1>This is an work page</h1>
+            <p>
+                parameter : {{ param }}
+            </p>
             <div class="list">
                 <div v-for="item in items" class="item">
                     <a href="javascript:;">
@@ -16,21 +19,21 @@
                 </div>
             </div>
         </div>
-        <PageMask ref="PageMask" />
+        <!-- <PageMask ref="PageMask" /> -->
     </div>
 </div>
 </template>
 <script>
 import settings from '@/settings.js' // settings
-import PageMask from '@/components/PageMask.vue'
+// import PageMask from '@/components/PageMask.vue'
 
 var api = settings.api || 'data.json';
 
 export default {
     name: 'Work',
-    components: {
-        PageMask
-    },
+    // components: {
+    //     PageMask
+    // },
     data() {
         return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
             items: []
@@ -38,20 +41,26 @@ export default {
     },
     created: function() {
         this.fetchData();
+        this.$route.params.pageIdx = 2; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
     },
     mounted: function(){
-        this.prev();
+        //this.prev();
+    },
+    computed: {
+        param: function () {
+            return this.$route.params;
+        }
     },
     watch: {
       '$route': 'fetchData' // 라우터 객체를 감시하고 있다가 fetchData() 함수를 호출한다
     },
     methods: {
-        prev() {
-            this.$refs.PageMask.prev();
-        },
-        next() {
-            this.$refs.PageMask.next();
-        },
+        // prev() {
+        //     this.$refs.PageMask.prev();
+        // },
+        // next() {
+        //     this.$refs.PageMask.next();
+        // },
         fetchData() {
             this.axios.get(api).then((response) => {
                 var _response = eval(response.data),

@@ -3,6 +3,9 @@
         <div class="container flex">
             <div class="wrap">
                 <img alt="Vue logo" src="../assets/logo.png">
+                <p>
+                    parameter : {{ param }}
+                </p>
                 <HelloWorld msg="Welcome to Your Vue.js App" />
             </div>
         </div>
@@ -28,6 +31,9 @@ export default {
         }
     },
     computed: {
+        param: function () {
+            return this.$route.params;
+        },
         username() {
             return this.$route.params.username
         }
@@ -37,7 +43,9 @@ export default {
     },
     created(){
         console.log('created');
+        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
         // this.getName();
+        // https://m.blog.naver.com/PostView.nhn?blogId=psj9102&logNo=221430447361&proxyReferer=https:%2F%2Fwww.google.com%2F
     },
     methods: {
         prev() {

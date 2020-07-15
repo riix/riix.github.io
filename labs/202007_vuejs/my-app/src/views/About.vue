@@ -4,6 +4,9 @@
         <div class="wrap">
             <h1>This is an about page</h1>
             <p>
+                parameter : {{ param }}
+            </p>
+            <p>
                 {{ message.hello }}
             </p>
             <p class="toggle" :class="{ in: show }">
@@ -59,10 +62,13 @@ export default {
     computed: { // computed에서 사용하고 있는 data에 변화가 있으면 자동으로 계산되는 함수들의 모음
         doubleValue: function() {
             return this.value * 2
+        },
+        param: function () {
+            return this.$route.params;
         }
     },
     created() {
-        console.log('created about.vue');
+        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
     }
 }
 </script>

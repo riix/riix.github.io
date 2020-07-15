@@ -3,6 +3,9 @@
     <div class="container">
         <div class="wrap">
             <h1>This is an contact page</h1>
+            <p>
+                parameter : {{ param }}
+            </p>
         </div>
     </div>
     <PageMask ref="PageMask" />
@@ -17,6 +20,9 @@ export default {
         PageMask
     },
     computed: {
+        param: function () {
+            return this.$route.params;
+        },
         username() {
             return this.$route.params.username
         }
@@ -28,6 +34,9 @@ export default {
         next() {
             this.$refs.PageMask.next();
         }
+    },
+    created() {
+        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
     }
 }
 </script>
