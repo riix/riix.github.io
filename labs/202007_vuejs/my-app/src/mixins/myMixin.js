@@ -1,6 +1,6 @@
 var MyMixin = {
     created: function () {
-        console.log('this is mixin2')
+        // console.log('this is mixin2')
     },
     methods:{
         getName(){

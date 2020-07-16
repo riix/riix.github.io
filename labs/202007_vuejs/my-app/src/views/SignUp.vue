@@ -12,7 +12,7 @@
                 <button v-on:click="SignUp()">가입하기</button>
             </div>
         </div>
-        <PageMask ref="PageMask" />
+        <!-- <PageMask ref="PageMask" /> -->
     </div>
 </template>
 

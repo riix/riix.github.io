@@ -34,7 +34,7 @@ export default {
     computed: {
         currentPage() {
             var _path = this.$route.path;
-            console.log('currentPage:', _path);
+            // console.log('currentPage:', _path);
             return _path;
         }
     }
@@ -43,6 +43,7 @@ export default {
 <style lang="less">
 #nav {
     position: absolute;
+    z-index: 4000;
     top: 50%;
     right: 0;
     padding: 30px;
@@ -62,8 +63,16 @@ export default {
         padding: 10px 0;
         font-weight: bold;
         color: #2c3e50;
+        transition: color 0s ease-in-out 0s;
         &.router-link-exact-active {
             color: #42b983;
+        }
+    }
+    .anim-page-prev &,
+    .anim-page-next & {
+        a {
+            color: #fff;
+            transition: color .1s ease-in-out .1s;
         }
     }
 }

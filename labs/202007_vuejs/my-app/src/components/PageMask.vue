@@ -1,11 +1,9 @@
 <template>
     <div class="section-mask">
-        <!--
         <div class="action">
             <button v-on:click="prev">up</button>
             <button v-on:click="next">down</button>
         </div>
-        -->
         <div ref="maskPrev" class="mask mask-prev" aria-hidden="true"></div>
         <div ref="maskNext" class="mask mask-next" aria-hidden="true"></div>
     </div>
@@ -34,12 +32,19 @@ export default {
 </script>
 
 <style scoped lang="less">
+.action {
+    position: fixed;
+    z-index: 2001;
+    top: 0;
+    left: 0;
+    margin: 10px;
+}
 .mask {
     &, &::after {
         content: '';
         display: block;
         position: fixed;
-        z-index: 1000;
+        z-index: 2000;
         top: 0;
         left: 0;
         right: 0;

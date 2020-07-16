@@ -8,7 +8,7 @@
             </p>
         </div>
     </div>
-    <PageMask ref="PageMask" />
+    <!-- <PageMask ref="PageMask" /> -->
 </div>
 </template>
 <script>

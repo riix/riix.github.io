@@ -10,14 +10,6 @@ import Award from '@/views/Award.vue';
 import Contact from '@/views/Contact.vue';
 import SignUp from '@/views/SignUp.vue';
 
-function dynamicPropsFn (route) {
-  const now = new Date()
-  console.log(now);
-  return {
-    name: (now.getFullYear() + parseInt(route.params.years)) + '!'
-  }
-}
-
 const routes = [{
         path: '/',
         name: 'Home',

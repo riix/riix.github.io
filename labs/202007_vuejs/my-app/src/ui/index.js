@@ -3,7 +3,7 @@
 const UI = {
     install(Vue, options) {
 
-        console.log('123');
+        // console.log('123');
 
         // Installing App-Wide Components & Directives
         // Vue.component(MyComponent.name, MyComponent)
@@ -24,7 +24,7 @@ const UI = {
         // Adding component lifecycle hooks or properties.
         Vue.mixin({
             mounted() {
-                console.log('UI Mounted!');
+                // console.log('UI Mounted!');
             }
         });
     }

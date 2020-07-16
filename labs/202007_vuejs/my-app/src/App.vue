@@ -9,12 +9,15 @@
 </template>
 
 <script>
+import settings from '@/settings.js' // settings
+import vars from '@/variables.js' // variables
+
 import Navigation from '@/components/Navigation.vue'
 import PageMask from '@/components/PageMask.vue'
 
 import MyPlugin from '@/plugins/myPlugin.js'
 import MyMixin from '@/mixins/myMixin.js'
-import settings from '@/settings.js' // settings
+
 
 export default {
     mixins: [MyMixin],
@@ -41,7 +44,7 @@ export default {
             // this.$refs.PageMask.next();
         },
         init() {
-            console.log('init');
+            // console.log('init');
         }
     }
 

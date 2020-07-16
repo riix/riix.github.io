@@ -22,7 +22,7 @@
             <button v-on:click="plus"> 클릭! </button>
         </div>
     </div>
-    <PageMask ref="PageMask" />
+    <!-- <PageMask ref="PageMask" /> -->
 </div>
 </template>
 <script>
@@ -38,6 +38,7 @@ export default {
             username: 'user-guest',
             value: 10,
             show: false,
+            // pageeee: 12333333,
             message: {
                 hello: 'Hello World',
                 iam: 'I am Richard'
@@ -67,8 +68,23 @@ export default {
             return this.$route.params;
         }
     },
+    // lifecycle
+    beforeCreate() {
+        // 가장 먼저 실행되는 훅
+        console.log('beforeCreate');
+
+        this.$route.params.pageIdx = 1;
+        console.log(this.$route.params.pageIdx);
+    },
     created() {
+        // data와 events가 활성화
+        console.log('created');
+        console.log(this.$route.params.pageIdx);
         this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
-    }
+    },
+    mounted(){
+        // Dom 삽입 후
+        console.log('mounted');
+    },
 }
 </script>

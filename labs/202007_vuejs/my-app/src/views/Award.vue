@@ -7,12 +7,8 @@
                 parameter : {{ param }}
             </p>
         </div>
-        <div class="action">
-            <button v-on:click="prev">up</button>
-            <button v-on:click="next">down</button>
-        </div>
     </div>
-    <PageMask ref="PageMask" />
+    <!-- <PageMask ref="PageMask" /> -->
 </div>
 </template>
 

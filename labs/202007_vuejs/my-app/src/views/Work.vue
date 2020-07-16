@@ -25,15 +25,15 @@
 </template>
 <script>
 import settings from '@/settings.js' // settings
-// import PageMask from '@/components/PageMask.vue'
+import PageMask from '@/components/PageMask.vue'
 
 var api = settings.api || 'data.json';
 
 export default {
     name: 'Work',
-    // components: {
-    //     PageMask
-    // },
+    components: {
+        PageMask
+    },
     data() {
         return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
             items: []
