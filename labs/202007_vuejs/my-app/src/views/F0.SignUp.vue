@@ -17,17 +17,16 @@
 </template>
 
 <script>
-import PageMask from '@/components/PageMask.vue'
-import HelloWorld from '@/components/HelloWorld.vue'
+import store from '@/store.js'
 import firebase from 'firebase'
 
 export default {
     name: 'SignUp',
-    components: {
-        PageMask
-    },
     data() {
-        return {
+        return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
+            state: store.state, // global state
+            pageIdx: 5, // 페이지 인덱스
+            // local
             msg: 'Welcome to Your Vue.js PWA',
             email: '',
             password: ''
@@ -37,6 +36,9 @@ export default {
         param: function () {
             return this.$route.params;
         }
+    },
+    mounted(){
+        this.$init(); // init
     },
     methods: {
         SignUp() {
@@ -49,21 +51,7 @@ export default {
             .catch((error) => {
                 console.log(error)
             })
-        },
-        prev() {
-            this.$refs.PageMask.prev();
-        },
-        next() {
-            this.$refs.PageMask.next();
         }
-    },
-    // lifecycle
-    beforeCreate() { // 가장 먼저 실행되는 훅
-        console.log('beforeCreate');
-        this.$route.params.pageIdx = 5;
-    },
-    created() {
-        this.$route.params.pageIdx = 5; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
     }
 }
 </script>

@@ -14,29 +14,32 @@
 
 
 <script>
-import PageMask from '@/components/PageMask.vue'
+import store from '@/store.js'
 
 export default {
     name: 'Award',
-    components: {
-        PageMask
+    data() {
+        return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
+            state: store.state, // global state
+            pageIdx: 3, // 페이지 인덱스
+            // local
+            username: 'user-guest',
+            value: 10,
+            show: false,
+            message: {
+                hello: 'Hello World',
+                iam: 'I am Richard'
+            }
+        };
     },
     computed: {
         param: function () {
             return this.$route.params;
         }
     },
-    // lifecycle
-    beforeCreate() { // 가장 먼저 실행되는 훅
-        console.log('beforeCreate');
-        this.$route.params.pageIdx = 3;
+    mounted(){
+        this.$init(); // init
     },
-    created() {
-        this.$route.params.pageIdx = 3;
-    },
-    // watch: {
-    //     '$route': 'prev'
-    // },
     methods: {
         prev() {
             this.$refs.PageMask.prev();

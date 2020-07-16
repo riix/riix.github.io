@@ -15,12 +15,10 @@ import vars from '@/variables.js' // variables
 import Navigation from '@/components/Navigation.vue'
 import PageMask from '@/components/PageMask.vue'
 
-import MyPlugin from '@/plugins/myPlugin.js'
-import MyMixin from '@/mixins/myMixin.js'
+import AppPlugin from '@/plugins'
 
 
 export default {
-    mixins: [MyMixin],
     components: {
         Navigation,
         PageMask

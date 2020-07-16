@@ -24,47 +24,36 @@
 </div>
 </template>
 <script>
+import store from '@/store.js'
 import settings from '@/settings.js' // settings
-import PageMask from '@/components/PageMask.vue'
 
 var api = settings.api || 'data.json';
 
 export default {
     name: 'Work',
-    components: {
-        PageMask
-    },
     data() {
         return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
+            state: store.state, // global state
+            pageIdx: 2, // 페이지 인덱스
+            // local
             items: []
         };
-    },
-    // lifecycle
-    beforeCreate() { // 가장 먼저 실행되는 훅
-        console.log('beforeCreate');
-        this.$route.params.pageIdx = 2;
-    },
-    created: function() {
-        this.fetchData();
-    },
-    mounted: function(){
-        //this.prev();
     },
     computed: {
         param: function () {
             return this.$route.params;
         }
     },
+    created() {
+        this.fetchData();
+    },
+    mounted() {
+        this.$init(); // init
+    },
     watch: {
       '$route': 'fetchData' // 라우터 객체를 감시하고 있다가 fetchData() 함수를 호출한다
     },
     methods: {
-        // prev() {
-        //     this.$refs.PageMask.prev();
-        // },
-        // next() {
-        //     this.$refs.PageMask.next();
-        // },
         fetchData() {
             this.axios.get(api).then((response) => {
                 var _response = eval(response.data),

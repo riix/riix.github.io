@@ -12,12 +12,15 @@
 </div>
 </template>
 <script>
-import PageMask from '@/components/PageMask.vue'
+import store from '@/store.js'
 
 export default {
     name: 'Contact',
-    components: {
-        PageMask
+    data() {
+        return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
+            state: store.state, // global state
+            pageIdx: 4, // 페이지 인덱스
+        };
     },
     computed: {
         param: function() {
@@ -27,21 +30,8 @@ export default {
             return this.$route.params.username
         }
     },
-    methods: {
-        prev() {
-            this.$refs.PageMask.prev();
-        },
-        next() {
-            this.$refs.PageMask.next();
-        }
+    mounted(){
+        this.$init(); // init
     },
-    // lifecycle
-    beforeCreate() { // 가장 먼저 실행되는 훅
-        console.log('beforeCreate');
-        this.$route.params.pageIdx = 4;
-    },
-    created() {
-        this.$route.params.pageIdx = 4;
-    }
 }
 </script>

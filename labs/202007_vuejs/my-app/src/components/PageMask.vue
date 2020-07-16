@@ -13,19 +13,23 @@
 export default {
     name: 'PageMask',
     methods: {
-        prev() {
-            console.log('prev');
-            document.body.classList.add('anim-page-prev');
-            this.$refs.maskPrev.addEventListener('animationend', function(){
-                document.body.classList.remove('anim-page-prev');
+        trigger(_el, _class) {
+            document.body.classList.add(_class);
+            _el.addEventListener('animationend', function(){
+                document.body.classList.remove(_class);
+            }, {
+                once: true
             });
         },
+        prev() {
+            var _el = this.$refs.maskPrev,
+                _class = 'anim-page-prev';
+            this.trigger(_el, _class);
+        },
         next() {
-            console.log('next');
-            document.body.classList.add('anim-page-next');
-            this.$refs.maskNext.addEventListener('animationend', function(){
-                document.body.classList.remove('anim-page-next');
-            });
+            var _el = this.$refs.maskNext,
+                _class = 'anim-page-next';
+            this.trigger(_el, _class);
         }
     }
 }
