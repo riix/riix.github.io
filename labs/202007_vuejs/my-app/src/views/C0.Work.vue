@@ -1,27 +1,27 @@
 <template>
-<div id="container" class="work">
-    <div class="container">
-        <div class="wrap">
-            <h1>This is an work page</h1>
-            <p>
-                parameter : {{ param }}
-            </p>
-            <div class="list">
-                <div v-for="item in items" class="item">
-                    <a href="javascript:;">
-                        <div class="module">
-                            <p class="number">{{ item.idx }}</p>
-                            <h3 class="name">{{ item.name }}</h3>
-                            <p class="client">{{ item.client }}</p>
-                            <p class="date">{{ item.date }}</p>
-                        </div>
-                    </a>
+    <div id="content" class="work">
+        <div class="container">
+            <div class="wrap">
+                <h1>This is an work page</h1>
+                <p>
+                    parameter : {{ param }}
+                </p>
+                <div class="list">
+                    <div v-for="item in items" class="item">
+                        <a href="javascript:;">
+                            <div class="module">
+                                <p class="number">{{ item.idx }}</p>
+                                <h3 class="name">{{ item.name }}</h3>
+                                <p class="client">{{ item.client }}</p>
+                                <p class="date">{{ item.date }}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
+            <!-- <PageMask ref="PageMask" /> -->
         </div>
-        <!-- <PageMask ref="PageMask" /> -->
     </div>
-</div>
 </template>
 <script>
 import store from '@/store.js'

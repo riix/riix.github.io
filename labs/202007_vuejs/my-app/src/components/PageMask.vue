@@ -14,6 +14,11 @@ import EventBus from '@/eventBus.js';
 
 export default {
     name: 'PageMask',
+    data() {
+        return {
+            timer: null
+        }
+    },
     created() {
         var _this = this;
         EventBus.$on('pageMaskPrev', function(){
@@ -25,9 +30,15 @@ export default {
     },
     methods: {
         trigger(_el, _class) {
-            document.body.classList.add(_class);
+            clearTimeout(this.timer);
+            var _classList = document.body.classList;
+            _classList.add('anim-page');
+            _classList.add(_class);
+            this.timer = setTimeout(function(){
+                _classList.remove('anim-page');
+            }, 1000);
             _el.addEventListener('animationend', function(){
-                document.body.classList.remove(_class);
+                _classList.remove(_class);
             }, {
                 once: true
             });
@@ -63,7 +74,8 @@ export default {
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
+        height: 200%;
+        height: 200vh;
         background-color: #000;
         transform: translate(0, 100%);
     }

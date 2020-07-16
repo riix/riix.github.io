@@ -1,5 +1,5 @@
 <template>
-    <div id="container" class="home">
+    <div id="content" class="home">
         <div class="container flex">
             <div class="wrap">
                 <img alt="Vue logo" src="../assets/logo.png">

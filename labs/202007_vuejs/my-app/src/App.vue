@@ -1,9 +1,11 @@
 <template>
     <div id="app">
-        <Navigation></Navigation>
-        <transition name="fade" mode="out-in">
-            <router-view name="default"></router-view>
-        </transition>
+        <div id="container">
+            <Navigation></Navigation>
+            <transition name="fade" mode="out-in">
+                <router-view name="default"></router-view>
+            </transition>
+        </div>
         <PageMask ref="PageMask" />
     </div>
 </template>
@@ -99,10 +101,14 @@ body { overflow-y: scroll; }
 .wrap {
     margin: 0 auto;
 }
-.anim-page-prev,
-.anim-page-next {
+#container {
+    opacity: 1;
+    transition: opacity 0s ease-in-out .3s;
+}
+.anim-page {
     #container {
         opacity: 0;
+        transition: opacity 0s ease-in-out .3s;
     }
 }
 </style>

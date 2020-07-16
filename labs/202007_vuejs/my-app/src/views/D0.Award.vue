@@ -1,17 +1,15 @@
 <template>
-<div id="container" class="award">
-    <div class="container">
-        <div class="wrap">
-            <h1>This is an vue.js award page</h1>
-            <p>
-                parameter : {{ param }}
-            </p>
+    <div id="content" class="award">
+        <div class="container">
+            <div class="wrap">
+                <h1>This is an vue.js award page</h1>
+                <p>
+                    parameter : {{ param }}
+                </p>
+            </div>
         </div>
     </div>
-    <!-- <PageMask ref="PageMask" /> -->
-</div>
 </template>
-
 
 <script>
 import store from '@/store.js'

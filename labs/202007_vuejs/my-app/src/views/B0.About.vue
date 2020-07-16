@@ -1,29 +1,29 @@
 <template>
-<div id="container" class="about" :class="username">
-    <div class="container">
-        <div class="wrap">
-            <h1>This is an about page</h1>
-            <p>
-                parameter : {{ param }}
-            </p>
-            <p>
-                {{ message.hello }}
-            </p>
-            <p class="toggle" :class="{ in: show }">
-                {{ message.iam }}
-            </p>
-            <button v-on:click="toggle"> 클릭! </button>
-            <div>
-                {{ value }}
+    <div id="content" class="about" :class="username">
+        <div class="container">
+            <div class="wrap">
+                <h1>This is an about page</h1>
+                <p>
+                    parameter : {{ param }}
+                </p>
+                <p>
+                    {{ message.hello }}
+                </p>
+                <p class="toggle" :class="{ in: show }">
+                    {{ message.iam }}
+                </p>
+                <button v-on:click="toggle"> 클릭! </button>
+                <div>
+                    {{ value }}
+                </div>
+                <div>
+                    {{ doubleValue }}
+                </div>
+                <button v-on:click="plus"> 클릭! </button>
             </div>
-            <div>
-                {{ doubleValue }}
-            </div>
-            <button v-on:click="plus"> 클릭! </button>
         </div>
+        <!-- <PageMask ref="PageMask" /> -->
     </div>
-    <!-- <PageMask ref="PageMask" /> -->
-</div>
 </template>
 <script>
 import store from '@/store.js'

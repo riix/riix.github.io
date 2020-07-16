@@ -1,5 +1,5 @@
 <template>
-    <div id="container" class="hello">
+    <div id="content" class="hello">
         <div class="container">
             <div class="wrap">
                 <p>
