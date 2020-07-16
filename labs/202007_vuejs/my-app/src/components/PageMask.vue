@@ -1,8 +1,8 @@
 <template>
     <div class="section-mask">
         <div class="action">
-            <button v-on:click="prev">up</button>
-            <button v-on:click="next">down</button>
+            <button @click="prev">up</button>
+            <button @click="next">down</button>
         </div>
         <div ref="maskPrev" class="mask mask-prev" aria-hidden="true"></div>
         <div ref="maskNext" class="mask mask-next" aria-hidden="true"></div>

@@ -3,6 +3,11 @@
     <div class="container">
         <div class="wrap">
             <h1>This is an about page</h1>
+            <div class="page-index">
+                지난 페이지 인덱스: {{ state.pageIdx.previous }}<br />
+                현재 페이지 인덱스: {{ state.pageIdx.current }}<br />
+                방향: {{ pageDirection }}
+            </div>
             <p>
                 parameter : {{ param }}
             </p>
@@ -26,19 +31,18 @@
 </div>
 </template>
 <script>
-import PageMask from '@/components/PageMask.vue'
+import Vue from 'vue'
+import store from '@/store'
 
 export default {
     name: 'About',
-    components: {
-        PageMask
-    },
+    pageIdx: 1,
     data() {
         return { // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
+            state: store.state,
             username: 'user-guest',
             value: 10,
             show: false,
-            // pageeee: 12333333,
             message: {
                 hello: 'Hello World',
                 iam: 'I am Richard'
@@ -51,12 +55,6 @@ export default {
         },
         plus: function() {
             this.value++
-        },
-        prev() {
-            this.$refs.PageMask.prev();
-        },
-        next() {
-            this.$refs.PageMask.next();
         }
     },
     computed: { // computed에서 사용하고 있는 data에 변화가 있으면 자동으로 계산되는 함수들의 모음
@@ -65,17 +63,18 @@ export default {
         },
         param: function () {
             return this.$route.params;
+        },
+        pageDirection: function(){
+            return 'next';
         }
     },
     // lifecycle
     beforeCreate() { // 가장 먼저 실행되는 훅
         console.log('beforeCreate');
-        this.$route.params.pageIdx = 1;
     },
-    created() {
-        // data와 events가 활성화
+    created() { // data와 events가 활성화
         console.log('created');
-        this.$route.params.pageIdx = 1;
+        console.log(this.$route.params);
     },
     mounted(){
         // Dom 삽입 후

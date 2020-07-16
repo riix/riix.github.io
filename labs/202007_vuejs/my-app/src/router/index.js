@@ -16,31 +16,39 @@ import SignUp from '@/views/SignUp.vue';
 const routes = [{
         path: '/',
         name: 'Home',
+        pageIdx: 0,
         component: Home
     },
     {
-        path: '/about/',
+        path: '/about',
         name: 'About',
+        params: {
+            pageIdx: 1
+        },
         component: About
     },
     {
         path: '/work',
         name: 'Work',
+        pageIdx: 2,
         component: Work
     },
     {
         path: '/award',
         name: 'Award',
+        pageIdx: 3,
         component: Award
     },
     {
         path: '/contact',
         name: 'Contact',
+        pageIdx: 4,
         component: Contact
     },
     {
         path: '/signup',
         name: 'SignUp',
+        pageIdx: 5,
         component: SignUp
     }
 ];
@@ -51,15 +59,12 @@ const router = new VueRouter({
     routes: routes
 });
 
+
+
 // router.beforeEach((to, from, next) => {
 // });
 router.afterEach((to, from) => {
-    // console.log('pageIdx:', vars.pageIdx.current);
-    // console.log('from', from.params.pageIdx);
-    // console.log('to', to.params.pageIdx);
-    // console.log(from.params.pageIdx, to.params.pageIdx);
-    // console.log(to.params, to.params.pageIdx);
-    // console.log(typeof to.params.pageIdx);
+    // console.log(router);
 });
 
 export default router

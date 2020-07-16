@@ -20,7 +20,7 @@ export default {
         PageMask
     },
     computed: {
-        param: function () {
+        param: function() {
             return this.$route.params;
         },
         username() {

@@ -1,14 +1,16 @@
 import Vue from 'vue'
+import router from './router'
 
 // settings
 import settings from './settings.js' // settings
 import vars from './variables.js' // variables
 
-// core logic
-import router from './router'
+
+
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
+
 import firebase from 'firebase'
 firebase.initializeApp(settings.firebase);
 
@@ -22,15 +24,14 @@ Vue.use(UI);
 
 Vue.config.productionTip = false
 
-
-Vue.prototype.$appName = '123';
+// Vue.prototype.$appName = '123';
 
 new Vue({
-    router,
-    axios,
-    VueAxios,
-    store,
-    settings,
-    vars,
+    router: router,
+    axios: axios,
+    VueAxios: VueAxios,
+    store: store,
+    settings: settings,
+    vars: vars,
     render: h => h(App)
 }).$mount('#app')
