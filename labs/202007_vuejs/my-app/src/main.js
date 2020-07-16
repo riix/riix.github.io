@@ -6,6 +6,7 @@ import router from './router'
 import settings from './settings.js' // settings
 import vars from './variables.js' // variables
 import store from './store.js'
+import EventBus from './eventBus.js';
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -20,6 +21,7 @@ import AppPlugin from './plugins'
 Vue.use(VueAxios, axios, Vuex, router)
 Vue.use(settings, vars)
 Vue.use(AppPlugin)
+Vue.use(store)
 
 Vue.config.productionTip = false
 

@@ -11,12 +11,12 @@
 <script>
 import settings from '@/settings.js' // settings
 import vars from '@/variables.js' // variables
-
-import Navigation from '@/components/Navigation.vue'
-import PageMask from '@/components/PageMask.vue'
+import store from '@/store.js'
 
 import AppPlugin from '@/plugins'
 
+import Navigation from '@/components/Navigation.vue'
+import PageMask from '@/components/PageMask.vue'
 
 export default {
     components: {
@@ -98,5 +98,11 @@ body { overflow-y: scroll; }
 }
 .wrap {
     margin: 0 auto;
+}
+.anim-page-prev,
+.anim-page-next {
+    #container {
+        opacity: 0;
+    }
 }
 </style>

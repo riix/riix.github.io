@@ -1,4 +1,5 @@
 import store from '@/store.js'
+import EventBus from '@/eventBus.js';
 
 var AppPlugin = {};
 
@@ -32,16 +33,22 @@ AppPlugin.install = function(Vue, options) {
 
         var _this = this;
 
-        var getDirection = function(){
-            var _current = _this.pageIdx || -1;
-            var _saved = store.state.savedPageIdx;
-            var _dir = (_current < _saved) ? 'prev' : 'next';
-            return _dir;
+        var pageMask = function(){
+            var getDirection = function(){
+                var _current = _this.pageIdx || -1;
+                var _saved = store.state.savedPageIdx;
+                var _dir = (_current < _saved) ? 'prev' : 'next';
+                return _dir;
+            };
+            var _dir = getDirection(); // get dir
+            store.state.savedPageIdx = _this.pageIdx; // set prev index
+            if (_dir == 'prev') {
+                EventBus.$emit('pageMaskPrev');
+            } else {
+                EventBus.$emit('pageMaskNext');
+            }
         };
-        var _dir = getDirection(); // get dir
-        store.state.savedPageIdx = _this.pageIdx; // set prev index
-
-        console.log(_dir);
+        pageMask();
     };
 
 }

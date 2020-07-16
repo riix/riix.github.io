@@ -10,8 +10,19 @@
 </template>
 
 <script>
+import EventBus from '@/eventBus.js';
+
 export default {
     name: 'PageMask',
+    created() {
+        var _this = this;
+        EventBus.$on('pageMaskPrev', function(){
+            _this.prev();
+        });
+        EventBus.$on('pageMaskNext', function(){
+            _this.next();
+        })
+    },
     methods: {
         trigger(_el, _class) {
             document.body.classList.add(_class);
