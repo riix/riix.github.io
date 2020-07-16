@@ -35,8 +35,13 @@ export default {
             this.$refs.PageMask.next();
         }
     },
+    // lifecycle
+    beforeCreate() { // 가장 먼저 실행되는 훅
+        console.log('beforeCreate');
+        this.$route.params.pageIdx = 4;
+    },
     created() {
-        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
+        this.$route.params.pageIdx = 4;
     }
 }
 </script>

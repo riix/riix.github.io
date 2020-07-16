@@ -48,7 +48,6 @@ export default {
     methods: { // method들을 정의
         toggle: function() {
             this.show = !this.show;
-            console.log('toggle', this.show);
         },
         plus: function() {
             this.value++
@@ -69,18 +68,14 @@ export default {
         }
     },
     // lifecycle
-    beforeCreate() {
-        // 가장 먼저 실행되는 훅
+    beforeCreate() { // 가장 먼저 실행되는 훅
         console.log('beforeCreate');
-
         this.$route.params.pageIdx = 1;
-        console.log(this.$route.params.pageIdx);
     },
     created() {
         // data와 events가 활성화
         console.log('created');
-        console.log(this.$route.params.pageIdx);
-        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
+        this.$route.params.pageIdx = 1;
     },
     mounted(){
         // Dom 삽입 후

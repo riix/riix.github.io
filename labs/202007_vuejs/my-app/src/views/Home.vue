@@ -38,12 +38,14 @@ export default {
             return this.$route.params.username
         }
     },
-    beforeCreate: function(){
-        // console.log(this.$myAddedProperty);
+    // lifecycle
+    beforeCreate() { // 가장 먼저 실행되는 훅
+        console.log('beforeCreate');
+        this.$route.params.pageIdx = 0;
     },
     created(){
         // console.log('created');
-        this.$route.params.pageIdx = 1; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
+        this.$route.params.pageIdx = 0; // https://mkki.github.io/vue.js/2018/06/12/start-vuejs-12.html
         // this.getName();
         // https://m.blog.naver.com/PostView.nhn?blogId=psj9102&logNo=221430447361&proxyReferer=https:%2F%2Fwww.google.com%2F
     },
