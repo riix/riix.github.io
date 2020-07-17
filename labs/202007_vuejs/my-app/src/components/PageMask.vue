@@ -4,8 +4,14 @@
             <button @click="prev">up</button>
             <button @click="next">down</button>
         </div>
-        <div ref="maskPrev" class="mask mask-prev" aria-hidden="true"></div>
-        <div ref="maskNext" class="mask mask-next" aria-hidden="true"></div>
+        <div class="mask mask-prev" aria-hidden="true">
+            <div class="before"></div>
+            <div class="after" ref="maskPrev"></div>
+        </div>
+        <div class="mask mask-next" aria-hidden="true">
+            <div class="before"></div>
+            <div class="after" ref="maskNext"></div>
+        </div>
     </div>
 </template>
 
@@ -36,8 +42,9 @@ export default {
             _classList.add(_class);
             this.timer = setTimeout(function(){
                 _classList.remove('anim-page');
-            }, 1000);
+            }, 5000);
             _el.addEventListener('animationend', function(){
+                console.log('end');
                 _classList.remove(_class);
             }, {
                 once: true
@@ -58,6 +65,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+@zIndex: 2000;
+@animDuration: 600ms;
+@animEasing: cubic-bezier(0.11, 0, 0.5, 0);
 .action {
     position: fixed;
     z-index: 2001;
@@ -66,33 +76,45 @@ export default {
     margin: 10px;
 }
 .mask {
-    &, &::after {
+    .before, .after {
         content: '';
         display: block;
         position: fixed;
-        z-index: 2000;
+        z-index: @zIndex;
         top: 0;
         left: 0;
         right: 0;
-        height: 200%;
-        height: 200vh;
-        background-color: #000;
+        height: 150%;
+        height: 150vh;
+        background-color: #41B883;
         transform: translate(0, 100%);
+    }
+    .after {
+        z-index: @zIndex - 1;
+        background-color: #35495E;
     }
 }
 .anim-page-prev .mask {
-    &, &::after {
-        animation: animPagePrev .6s ease-in-out 0s forwards;
+    .before, .after {
+        animation: animPagePrev @animDuration @animEasing 0s forwards;
+    }
+    .after {
+        animation-duration: @animDuration + 50ms;
+        animation-delay: 50ms;
     }
 }
 .anim-page-next .mask {
-    &, &::after {
-        animation: animPageNext .6s ease-in-out 0s forwards;
+    .before, .after {
+        animation: animPageNext @animDuration @animEasing 0s forwards;
+    }
+    .after {
+        animation-duration: @animDuration + 50ms;
+        animation-delay: 50ms;
     }
 }
 @keyframes animPagePrev {
     0% {
-        transform: translate(0, 100%);
+        transform: translate(0, 75%);
     }
     100% {
         transform: translate(0, -100%);

@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <div id="container">
-            <Navigation></Navigation>
-            <transition name="fade" mode="out-in">
+            <Navigation ref="Navigation" role="navigation"></Navigation>
+            <transition name="page-trainsition">
                 <router-view name="default"></router-view>
             </transition>
         </div>
@@ -101,14 +101,25 @@ body { overflow-y: scroll; }
 .wrap {
     margin: 0 auto;
 }
-#container {
-    opacity: 1;
-    transition: opacity 0s ease-in-out .3s;
+.page-trainsition-leave-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
-.anim-page {
-    #container {
-        opacity: 0;
-        transition: opacity 0s ease-in-out .3s;
-    }
+.page-trainsition-leave-to {
+    transition: opacity .2s ease-in-out .1s;
+    opacity: 0;
+}
+.page-trainsition-enter-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: opacity .2s ease-in-out .1s;
+    opacity: 0;
+}
+.page-trainsition-enter-to {
+    opacity: 0;
 }
 </style>
