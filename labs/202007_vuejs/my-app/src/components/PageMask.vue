@@ -42,9 +42,11 @@ export default {
             _classList.add(_class);
             this.timer = setTimeout(function(){
                 _classList.remove('anim-page');
-            }, 5000);
+                _classList.remove(_class);
+            }, 700);
+            if (typeof _el !== 'object') return false;
             _el.addEventListener('animationend', function(){
-                console.log('end');
+                clearTimeout(this.timer);
                 _classList.remove(_class);
             }, {
                 once: true

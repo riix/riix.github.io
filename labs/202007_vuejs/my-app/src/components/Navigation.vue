@@ -1,23 +1,23 @@
 <template>
     <div id="nav">
-        <ul>
+        <ul ref="navigationList">
             <li class="d1" :class="[currentPage == '/' ? activeClass : '']">
-                <router-link to="/">Home</router-link>
+                <router-link to="/"><span>Home</span></router-link>
             </li>
             <li class="d1" :class="[currentPage.includes('about') ? activeClass : '']">
-                <router-link to="/about">About</router-link>
+                <router-link to="/about"><span>About</span></router-link>
             </li>
             <li class="d1" :class="[currentPage.includes('work') ? activeClass : '']">
-                <router-link to="/work" >Work</router-link>
+                <router-link to="/work" ><span>Work</span></router-link>
             </li>
             <li class="d1" :class="[currentPage.includes('award') ? activeClass : '']">
-                <router-link to="/award" >Award</router-link>
+                <router-link to="/award" ><span>Award</span></router-link>
             </li>
             <li class="d1" :class="[currentPage.includes('contact') ? activeClass : '']">
-                <router-link to="/contact">Contact</router-link>
+                <router-link to="/contact"><span>Contact</span></router-link>
             </li>
             <li class="d1" :class="[currentPage.includes('signup') ? activeClass : '']">
-                <router-link to="/signup">SignUp</router-link>
+                <router-link to="/signup"><span>SignUp</span></router-link>
             </li>
         </ul>
     </div>
@@ -36,6 +36,14 @@ export default {
             var _path = this.$route.path;
             // console.log('currentPage:', _path);
             return _path;
+        }
+    },
+    created() {
+        this.setHoverEL();
+    },
+    methods: {
+        setHoverEL: function(){
+
         }
     }
 }
@@ -64,6 +72,7 @@ export default {
         font-weight: bold;
         color: #2c3e50;
         transition: color 0s ease-in-out 0s;
+        text-decoration: none;
         &.router-link-exact-active {
             color: #42b983;
         }

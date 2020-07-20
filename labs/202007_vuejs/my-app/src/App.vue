@@ -108,7 +108,7 @@ body { overflow-y: scroll; }
     right: 0;
 }
 .page-trainsition-leave-to {
-    transition: opacity .2s ease-in-out .1s;
+    transition: opacity .3s ease-in-out .2s;
     opacity: 0;
 }
 .page-trainsition-enter-active {
@@ -116,7 +116,7 @@ body { overflow-y: scroll; }
     top: 0;
     left: 0;
     right: 0;
-    transition: opacity .2s ease-in-out .1s;
+    transition: opacity .3s ease-in-out .2s;
     opacity: 0;
 }
 .page-trainsition-enter-to {
