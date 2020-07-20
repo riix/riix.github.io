@@ -1,6 +1,6 @@
 <template>
     <div id="nav">
-        <ul ref="navigationList">
+        <ul>
             <li class="d1" :class="[currentPage == '/' ? activeClass : '']">
                 <router-link to="/"><span>Home</span></router-link>
             </li>
@@ -28,29 +28,52 @@ export default {
     name: 'Navigation',
     data: function(){ // vue component 에서는 무언가를 return 하는 함수를 넣어줘야함
         return {
-            activeClass: 'in'
+            activeClass: 'in',
+            pages: [
+                {
+                    name: 'Home',
+                    link: '/',
+                    includes: '/'
+                },
+                {
+                    name: 'About',
+                    link: '/about',
+                    includes: 'about'
+                },
+                {
+                    name: 'Work',
+                    link: '/work',
+                    includes: 'work'
+                },
+                {
+                    name: 'Award',
+                    link: '/award',
+                    includes: 'award'
+                },
+                {
+                    name: 'Contact',
+                    link: '/contact',
+                    includes: 'contact'
+                },
+                {
+                    name: 'SignUp',
+                    link: '/signup',
+                    includes: 'signup'
+                },
+            ]
         };
     },
     computed: {
         currentPage() {
             var _path = this.$route.path;
-            // console.log('currentPage:', _path);
             return _path;
-        }
-    },
-    created() {
-        this.setHoverEL();
-    },
-    methods: {
-        setHoverEL: function(){
-
         }
     }
 }
 </script>
 <style lang="less">
 #nav {
-    position: absolute;
+    position: fixed;
     z-index: 4000;
     top: 50%;
     right: 0;

@@ -14,14 +14,18 @@ import VueAxios from 'vue-axios'
 import firebase from 'firebase'
 firebase.initializeApp(settings.firebase);
 
+import vueSmoothScroll from 'vue-smooth-scroll'
+
 // app
 import App from './App.vue'
 import AppPlugin from './plugins'
 
+
 Vue.use(VueAxios, axios, Vuex, router)
 Vue.use(settings, vars)
-Vue.use(AppPlugin)
 Vue.use(store)
+Vue.use(AppPlugin)
+Vue.use(vueSmoothScroll)
 
 Vue.config.productionTip = false
 

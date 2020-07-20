@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" ref="App">
         <div id="container">
             <Navigation ref="Navigation" role="navigation"></Navigation>
             <transition name="page-trainsition">
@@ -7,6 +7,7 @@
             </transition>
         </div>
         <PageMask ref="PageMask" />
+        <ScrollTop ref="ScrollTop" />
     </div>
 </template>
 
@@ -19,11 +20,18 @@ import AppPlugin from '@/plugins'
 
 import Navigation from '@/components/Navigation.vue'
 import PageMask from '@/components/PageMask.vue'
+import ScrollTop from '@/components/ScrollTop.vue'
 
 export default {
     components: {
         Navigation,
-        PageMask
+        PageMask,
+        ScrollTop
+    },
+    data: function() {
+        return {
+            ddd: 0
+        }
     },
     created(){ // 실행
         this.init(); // 현재페이지
@@ -47,16 +55,6 @@ export default {
             // console.log('init');
         }
     }
-
-    // watch: {
-    //     $route: {
-    //         handler(to, from) {
-    //             // pageHandler(to, from)
-    //             console.log(pageHandler);
-    //         },
-    //         immediate: true,
-    //     }
-    // },
 }
 </script>
 <style lang="less">
@@ -100,6 +98,17 @@ body { overflow-y: scroll; }
 }
 .wrap {
     margin: 0 auto;
+}
+.sr-only {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
 }
 .page-trainsition-leave-active {
     position: fixed;
