@@ -3,7 +3,7 @@
         <div class="container flex">
             <div class="wrap">
                 <img alt="Vue logo" src="../assets/logo.png">
-                <p>
+                <p data-splitting>
                     parameter : {{ param }}
                 </p>
                 <HelloWorld msg="Welcome to Your Vue.js App" />

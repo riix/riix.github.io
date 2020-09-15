@@ -2,7 +2,7 @@
     <div id="content" class="about" :class="username">
         <div class="container">
             <div class="wrap">
-                <h1>This is an about page</h1>
+                <h1 data-splitting>This is an about page</h1>
                 <p>
                     parameter : {{ param }}
                 </p>
@@ -68,3 +68,8 @@ export default {
     }
 }
 </script>
+<style type="less">
+.about {
+    background-color: #eee;
+}
+</style>

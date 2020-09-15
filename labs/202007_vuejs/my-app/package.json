@@ -9,6 +9,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "es6-promise": "^4.2.8",
+    "splitting": "^1.0.6",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.2.0",

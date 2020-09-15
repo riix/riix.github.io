@@ -14,7 +14,12 @@ import VueAxios from 'vue-axios'
 import firebase from 'firebase'
 firebase.initializeApp(settings.firebase);
 
+// plugins
 import vueSmoothScroll from 'vue-smooth-scroll'
+
+import 'splitting/dist/splitting.css';
+import 'splitting/dist/splitting-cells.css';
+import Splitting from 'splitting';
 
 // app
 import App from './App.vue'
@@ -33,7 +38,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$globalValue = 'Global Scope!';
 
-new Vue({
+var vm = new Vue({
     router,
     Vuex,
     axios,
@@ -44,3 +49,5 @@ new Vue({
     AppPlugin,
     render: h => h(App)
 }).$mount('#app')
+
+console.info(vm);

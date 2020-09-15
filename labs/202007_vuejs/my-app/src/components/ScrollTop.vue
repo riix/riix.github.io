@@ -30,8 +30,8 @@ export default {
                 document.body.classList.remove(this.bodyClass);
             }
         },
-        toggleClass (){
-            var _boolMore = this.windowScrollY >= 50,
+        toggleClass(){
+            let _boolMore = this.windowScrollY >= 50,
                 _boolLonger = (this.$root.$el.clientHeight > this.windowHeight),
                 _bool = (_boolLonger && _boolMore);
             this.isShow = _bool;
@@ -40,8 +40,8 @@ export default {
                 this.toggleClassBody(); // toggle
             }
         },
-        onWindowScroll (){
-            var _this = this;
+        onWindowScroll(){
+            let _this = this;
             window.addEventListener('scroll', function(e) {
                 _this.windowScrollY = window.scrollY;
                 if (!_this.ticky) {

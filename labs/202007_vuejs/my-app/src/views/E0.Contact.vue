@@ -2,7 +2,7 @@
     <div id="content" class="contact">
         <div class="container">
             <div class="wrap">
-                <h1>This is an contact page</h1>
+                <h1 data-splitting>This is an contact page</h1>
                 <p>
                     parameter : {{ param }}
                 </p>

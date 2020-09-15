@@ -2,7 +2,7 @@
     <div id="content" class="work">
         <div class="container">
             <div class="wrap">
-                <h1>This is an work page</h1>
+                <h1 data-splitting>This is an work page</h1>
                 <p>
                     parameter : {{ param }}
                 </p>

@@ -1,6 +1,6 @@
 <template>
     <div class="section-mask">
-        <div class="action">
+        <div class="action" v-if="showButton">
             <button @click="prev">up</button>
             <button @click="next">down</button>
         </div>
@@ -22,6 +22,7 @@ export default {
     name: 'PageMask',
     data() {
         return {
+            showButton: false, // 버튼 보이기
             timer: null
         }
     },
@@ -98,7 +99,8 @@ export default {
 }
 .anim-page-prev .mask {
     .before, .after {
-        animation: animPagePrev @animDuration @animEasing 0s forwards;
+        // animation: animPagePrev @animDuration @animEasing 0s forwards;
+        animation: animPageNext @animDuration @animEasing 0s forwards;
     }
     .after {
         animation-duration: @animDuration + 50ms;
@@ -116,18 +118,18 @@ export default {
 }
 @keyframes animPagePrev {
     0% {
-        transform: translate(0, 75%);
-    }
-    100% {
-        transform: translate(0, -100%);
-    }
-}
-@keyframes animPageNext {
-    0% {
         transform: translate(0, -100%);
     }
     100% {
         transform: translate(0, 100%);
+    }
+}
+@keyframes animPageNext {
+    0% {
+        transform: translate(0, 75%);
+    }
+    100% {
+        transform: translate(0, -100%);
     }
 }
 </style>
