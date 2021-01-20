@@ -65,7 +65,7 @@ $(function() {
             $answer.val('입력 중').blur();
             setTimeout(function(){
                 $answer.val('').focus();
-            }, 200);
+            }, 150);
         };
 
         var removeAnim = function(){
