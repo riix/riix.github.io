@@ -9,11 +9,17 @@ $(function() {
 
     'use strict';
 
+    var $html = $('html');
+
     function getRandomInArray(_arr) {
         var _result = ['blue', 'red', 'green', 'orange', 'pink'];
         _result = (typeof _arr === 'object') ? _arr : _result;
         _result = _result[Math.floor(Math.random() * _result.length)];
         return _result;
+    };
+
+    function isMobile(){
+        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     };
 
     var initTypingGame = function(){
@@ -33,6 +39,10 @@ $(function() {
             question = '',
             answer = '';
 
+        var boolMobile = isMobile();
+
+        $html.addClass((boolMobile === true) ? 'is-mobile' : 'is-classic');
+
         var playSound = function(_case) {
             switch (_case) {
                 case 'success':
@@ -42,7 +52,9 @@ $(function() {
                     sound = new Audio(MP3.fail);
                     break;
                 default:
-                    sound = new Audio(MP3.keydown);
+                    if (boolMobile !== true) { // 모바일 일땐 생략
+                        sound = new Audio(MP3.keydown);
+                    }
             }
             sound.play();
         };
@@ -100,14 +112,7 @@ $(function() {
         var setHandler = function(){
             $answer.on('keydown', function(e) {
                 playSound();
-                // if (e.keyCode == '13') {
-                //     onSubmit();
-                // }
             });
-            // $submit.on('click', function(){
-            //     onSubmit();
-            //     return false;
-            // });
             $form.on('submit', function(e) {
                 e.preventDefault();
                 onSubmit();

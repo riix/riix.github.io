@@ -32,6 +32,7 @@
         position: fixed;
         left: 0;
         right: 0;
+        bottom: 20vh;
         text-align: center;
         transform: translate(0, 100%) scale(0.5);
         opacity: 0;
@@ -62,6 +63,16 @@
         }
     }
 }
+/*
+.is-mobile .section-animate {
+    .module {
+        transform: translate(0, -100%) scale(0.5);
+        &.in {
+            animation-name: animSuccessMobile;
+        }
+    }
+}
+*/
 .section-animate[data-idx="0"] {
     img { display: none; }
     .item img:nth-child(odd) { display: block; }
@@ -73,6 +84,20 @@
 @keyframes animSuccess {
     0% {
         transform: translate(0, 100%) scale(0.5);
+        opacity: 0;
+    }
+    50%, 80% {
+        transform: translate(0, 0%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0%) scale(1.2);
+        opacity: 0;
+    }
+}
+@keyframes animSuccessMobile {
+    0% {
+        transform: translate(0, -100%) scale(0.5);
         opacity: 0;
     }
     50%, 80% {
