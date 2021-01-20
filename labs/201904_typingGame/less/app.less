@@ -63,16 +63,20 @@
         }
     }
 }
+
 /*
 .is-mobile .section-animate {
     .module {
-        transform: translate(0, -100%) scale(0.5);
+        bottom: auto;
+        top: 20vh;
+        transform: translate(0, -30%) scale(0.5);
         &.in {
             animation-name: animSuccessMobile;
         }
     }
 }
 */
+
 .section-animate[data-idx="0"] {
     img { display: none; }
     .item img:nth-child(odd) { display: block; }
@@ -97,7 +101,7 @@
 }
 @keyframes animSuccessMobile {
     0% {
-        transform: translate(0, -100%) scale(0.5);
+        transform: translate(0, -30%) scale(0.5);
         opacity: 0;
     }
     50%, 80% {
