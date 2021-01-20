@@ -1,0 +1,92 @@
+.form-submit { width: 100%; }
+.form-question,
+.form-result {
+    &, &:disabled {
+        background-color: #fff;
+        border-color: #fff;
+    }
+}
+.form-question {
+    &, &:disabled {
+        text-align: center;
+        color: #000;
+        font-size: 30px;
+        font-weight: bold;
+    }
+}
+.form-answer {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.uk-form-success:disabled, .uk-form-success:focus {
+    color: #32d296;
+    border-color: #32d296;
+}
+.uk-form-danger:disabled, .uk-form-danger:focus {
+    color: #f0506e;
+    border-color: #f0506e;
+}
+.section-animate {
+    .module {
+        position: fixed;
+        left: 0;
+        right: 0;
+        text-align: center;
+        transform: translate(0, 100%) scale(0.5);
+        opacity: 0;
+        img {
+            width: 100%;
+            max-width: 100%;
+        }
+        .item {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 200px;
+            border: solid 10px #fff;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+            line-height: 100px;
+        }
+        &.is-success .item {
+            border-color: #32d296;
+        }
+        &.is-fail .item {
+            border-color:  #f0506e;
+        }
+        &.in {
+            animation: animSuccess .8s ease-in-out 0s;
+        }
+    }
+}
+.section-animate[data-idx="0"] {
+    img { display: none; }
+    .item img:nth-child(odd) { display: block; }
+}
+.section-animate[data-idx="1"] {
+    img { display: none; }
+    .item img:nth-child(even) { display: block; }
+}
+@keyframes animSuccess {
+    0% {
+        transform: translate(0, 100%) scale(0.5);
+        opacity: 0;
+    }
+    50%, 80% {
+        transform: translate(0, 0%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0%) scale(1.2);
+        opacity: 0;
+    }
+}
+a[uk-totop] {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 40px;
+}
