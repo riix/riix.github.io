@@ -62,7 +62,7 @@ $(function() {
         var reset = function() {
             question = getRandomInArray(arrQuestion);
             $question.val(question);
-            $answer.val('').blur();
+            $answer.val('입력 중').blur();
             setTimeout(function(){
                 $answer.val('').focus();
             }, 300);
