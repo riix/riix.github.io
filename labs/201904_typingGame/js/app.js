@@ -62,14 +62,14 @@ $(function() {
         var reset = function() {
             question = getRandomInArray(arrQuestion);
             $question.val(question);
-            $answer.val('').focus();
+            $answer.val('').blur();
+            setTimeout(function(){
+                $answer.val('').focus();
+            }, 300);
         };
 
         var removeAnim = function(){
             setTimeout(function(){
-                if (boolMobile === true) {
-                    $answer.val('').focus();
-                }
                 $anim.removeClass('in');
             }, 1000);
         };
