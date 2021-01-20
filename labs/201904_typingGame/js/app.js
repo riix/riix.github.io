@@ -67,6 +67,9 @@ $(function() {
 
         var removeAnim = function(){
             setTimeout(function(){
+                if (boolMobile === true) {
+                    $answer.val('').focus();
+                }
                 $anim.removeClass('in');
             }, 1000);
         };
