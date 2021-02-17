@@ -43,7 +43,7 @@ $(function(){
                 right: 0,
                 bottom: 0,
                 dataAttr: "dpnm",
-                dataAttrVal: "가입신청"
+                dataAttrVal: "상담신청"
             }]
         }
 
